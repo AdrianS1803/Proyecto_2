@@ -3,6 +3,6 @@ module com.example.proyecto_2 {
     requires javafx.fxml;
 
 
-    opens com.example.proyecto_2 to javafx.fxml;
-    exports com.example.proyecto_2;
+    opens GUI to javafx.fxml;
+    exports GUI;
 }
