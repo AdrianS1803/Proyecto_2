@@ -1,17 +1,36 @@
 package ArbolBinario;
 
-public class ArbolBinarioNodo<T extends Comparable<T>> {
-    T element;
-    ArbolBinarioNodo<T> left;
-    ArbolBinarioNodo<T> right;
+public class ArbolBinarioNodo {
+   private Integer dato;
 
-    public ArbolBinarioNodo(T element) {
-        this(element, null, null);
+    private Integer ocurrencias;
+     ArbolBinarioNodo leftchild;
+     ArbolBinarioNodo rightchild;
+
+    public ArbolBinarioNodo(Integer data, Integer ocurrencias) {
+        this.dato = data;
+        this.ocurrencias = ocurrencias;
+        this.leftchild = null;
+        this.rightchild = null;
     }
 
-    public ArbolBinarioNodo(T element, ArbolBinarioNodo<T> left, ArbolBinarioNodo<T> right) {
-        this.element = element;
-        this.left = left;
-        this.right = right;
+    public Integer getData(){
+        return this.dato;
+    }
+
+    public ArbolBinarioNodo getLeftchild(){
+        return this.leftchild;
+    }
+
+    public void setLeftchild(ArbolBinarioNodo leftchild) {
+        this.leftchild = leftchild;
+    }
+
+    public ArbolBinarioNodo getRightchild(){
+        return this.rightchild;
+    }
+
+    public void setRightchild(ArbolBinarioNodo rightchild) {
+        this.rightchild = rightchild;
     }
 }

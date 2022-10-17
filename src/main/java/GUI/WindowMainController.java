@@ -38,7 +38,7 @@ public class WindowMainController {
         //Sebas Ip
         //Sebas Ip
 
-        Cliente cliente = new Cliente("192.168.1.184",9000);
+        Cliente cliente = new Cliente("192.168.100.7",9000);
 
         test_label.setText(cliente.send(textField_search_word.getText()));
     }
