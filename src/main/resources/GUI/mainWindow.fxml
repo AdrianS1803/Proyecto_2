@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.34107847435335376" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="914.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="GUI.WindowMainController">
+<SplitPane dividerPositions="0.34107847435335376" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.WindowMainController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
@@ -23,10 +23,10 @@
                 </Label>
                 <BorderPane layoutX="21.0" layoutY="98.0" prefHeight="354.0" prefWidth="266.0">
                     <top>
-                        <TextField promptText="Buscador..." BorderPane.alignment="CENTER" />
+                        <TextField fx:id="textField_search_word" promptText="Buscador..." BorderPane.alignment="CENTER" />
                     </top>
                     <bottom>
-                        <Button mnemonicParsing="false" text="Buscar" BorderPane.alignment="CENTER" />
+                        <Button fx:id="test_button" mnemonicParsing="false" onAction="#search_word" text="Buscar" BorderPane.alignment="CENTER" />
                     </bottom>
                 </BorderPane>
             </children></AnchorPane>
@@ -47,6 +47,7 @@
                 <Pane layoutX="19.0" layoutY="162.0" prefHeight="316.0" prefWidth="562.0">
                     <children>
                         <ScrollBar layoutX="533.0" layoutY="14.0" orientation="VERTICAL" prefHeight="292.0" prefWidth="14.0" />
+                  <Label fx:id="test_label" layoutX="14.0" layoutY="26.0" prefHeight="17.0" prefWidth="287.0" />
                     </children>
                 </Pane>
             </children>
