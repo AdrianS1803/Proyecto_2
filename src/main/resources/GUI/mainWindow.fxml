@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <SplitPane dividerPositions="0.34107847435335376" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.WindowMainController">
@@ -21,14 +22,22 @@
                         <Font name="Freestyle Script" size="40.0" />
                     </font>
                 </Label>
-                <BorderPane layoutX="21.0" layoutY="98.0" prefHeight="354.0" prefWidth="266.0">
+                <BorderPane fx:id="pane_archivos" layoutX="21.0" layoutY="98.0" prefHeight="354.0" prefWidth="266.0">
                     <top>
                         <TextField fx:id="textField_search_word" promptText="Buscador..." BorderPane.alignment="CENTER" />
                     </top>
                     <bottom>
-                        <Button fx:id="test_button" mnemonicParsing="false" onAction="#search_word" text="Buscar" BorderPane.alignment="CENTER" />
+                        <Button fx:id="search_button" mnemonicParsing="false" onAction="#search_word" text="Buscar" BorderPane.alignment="CENTER" />
                     </bottom>
+               <center>
+                  <VBox fx:id="pane_archivos" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="archivos" prefHeight="17.0" prefWidth="45.0" />
+                     </children>
+                  </VBox>
+               </center>
                 </BorderPane>
+            <Button fx:id="test" layoutX="128.0" layoutY="478.0" mnemonicParsing="false" onAction="#indizar" text="test" />
             </children></AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>

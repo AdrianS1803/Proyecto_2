@@ -61,7 +61,7 @@ public class Cliente {
             mensaje = entrada.readUTF();//Ya es el mensaje del server
 
 
-            System.out.println(mensaje);
+            //System.out.println(mensaje);
 
             socket.close();
 

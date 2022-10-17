@@ -1,9 +1,8 @@
 package Socket;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import Logica.Parse;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -70,7 +69,10 @@ public class Server {
 
                 System.out.println(mensaje);
 
-                salida.writeUTF("Server: "+ mensaje);
+                String resultado = ir_parse(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaTxt.txt"), mensaje);
+
+                salida.writeUTF("Server: "+ resultado);
+
 
                 socket.close();
                 System.out.println("Cliente desconectado");
@@ -79,6 +81,10 @@ public class Server {
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+    private String ir_parse(File file, String searching) throws FileNotFoundException {
+        Parse parse = new Parse();
+        return parse.parseDocument(file, searching);
     }
 
 }
