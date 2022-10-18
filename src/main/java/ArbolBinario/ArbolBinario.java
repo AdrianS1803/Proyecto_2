@@ -19,13 +19,13 @@ public class ArbolBinario{
                if(data < idetificador.getData()){
                    idetificador = idetificador.getLeftchild();
                    if(idetificador == null){
-                       padre.setLeftchild() = newNode;
+                       padre.setLeftchild(newNode);
                        return;
                    }
                }else{
                    idetificador = idetificador.getRightchild();
                    if(idetificador == null){
-                       padre.setRightchild() = newNode;
+                       padre.setRightchild(newNode);
                        return;
                    }
                }

@@ -4,8 +4,8 @@ public class ArbolBinarioNodo {
    private Integer dato;
 
     private Integer ocurrencias;
-     ArbolBinarioNodo leftchild;
-     ArbolBinarioNodo rightchild;
+    private ArbolBinarioNodo leftchild;
+    private ArbolBinarioNodo rightchild;
 
     public ArbolBinarioNodo(Integer data, Integer ocurrencias) {
         this.dato = data;
