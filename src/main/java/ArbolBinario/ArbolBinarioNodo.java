@@ -1,20 +1,20 @@
 package ArbolBinario;
 
 public class ArbolBinarioNodo {
-   private Integer dato;
+   private String dato;
 
     private Integer ocurrencias;
     private ArbolBinarioNodo leftchild;
     private ArbolBinarioNodo rightchild;
 
-    public ArbolBinarioNodo(Integer data, Integer ocurrencias) {
+    public ArbolBinarioNodo(String data, Integer ocurrencias) {
         this.dato = data;
         this.ocurrencias = ocurrencias;
         this.leftchild = null;
         this.rightchild = null;
     }
 
-    public Integer getData(){
+    public String getData(){
         return this.dato;
     }
 

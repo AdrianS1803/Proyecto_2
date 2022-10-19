@@ -7,7 +7,7 @@ public class ArbolBinario{
         root = null;
     }
 
-    public void insertNode(Integer data, Integer ourrencias){
+    public void insertNode(String data, Integer ourrencias){
         ArbolBinarioNodo newNode = new ArbolBinarioNodo(data, ourrencias);
         if(root == null){
             root = newNode;
@@ -16,7 +16,7 @@ public class ArbolBinario{
            ArbolBinarioNodo idetificador = root;
            while (true){
                padre = idetificador;
-               if(data < idetificador.getData()){
+               if(data.equals(idetificador.getData())){///preguntar
                    idetificador = idetificador.getLeftchild();
                    if(idetificador == null){
                        padre.setLeftchild(newNode);
@@ -31,5 +31,20 @@ public class ArbolBinario{
                }
            }
         }
+    }
+
+    public ArbolBinarioNodo search(String data){
+        ArbolBinarioNodo identificador = root;
+        while(identificador.getData() != data){
+            if(data.equals(identificador.getData())){////preguntar
+                identificador.setLeftchild(identificador);
+            }else{
+                identificador.setRightchild(identificador);
+            }
+            if(identificador == null){
+               return null;
+            }
+        }
+        return identificador;
     }
 }
