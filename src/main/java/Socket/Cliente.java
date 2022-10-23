@@ -1,74 +1,82 @@
 package Socket;
 
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import Logica.Documento;
+import Logica.Mensaje;
+
+import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Cliente {
-    /*public static void main(String[] args){
-        final String Host = "192.168.5.171"; //ipconfig en el cmd
-        final int puerto = 9000;
 
-        DataOutputStream salida;
-        DataInputStream entrada;
-
-        try {
-            Socket socket = new Socket(Host,puerto);
-
-            entrada = new DataInputStream(socket.getInputStream());
-            salida = new DataOutputStream(socket.getOutputStream());
-
-            salida.writeUTF("Hola mundo desde el cliente");//Manda el mensaje al server
-            //Entro al server
-            String mensaje = entrada.readUTF();//Ya es el mensaje del server
-
-            System.out.println(mensaje);
-
-            socket.close();
-
-
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }*/
+    private ArrayList<Documento> lista_contiene_palabra = new ArrayList<>();
+    private Mensaje mensaje;
     private String Host;
     private int puerto;
-
 
     public Cliente(String Host, Integer puerto){
         this.Host = Host;
         this.puerto = puerto;
     }
 
-    public String send(String enviando){
-        DataOutputStream salida;
-        DataInputStream entrada;
-        String mensaje;
-
+    public Mensaje sendSearch(Mensaje enviando){
         try {
-            Socket socket = new Socket(Host,puerto);
+            Socket socket = new Socket(Host, puerto);
 
-            entrada = new DataInputStream(socket.getInputStream());
-            salida = new DataOutputStream(socket.getOutputStream());
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-            salida.writeUTF(enviando);//Manda el mensaje al server
-            //Entro al server
-            mensaje = entrada.readUTF();//Ya es el mensaje del server
+            objectOutputStream.writeObject(enviando);
+            System.out.println(mensaje.getMensaje2());
 
-
-            //System.out.println(mensaje);
+            this.mensaje = (Mensaje)objectInputStream.readObject();
 
             socket.close();
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        }catch (Exception e){
+            System.out.println(e);
         }
-        return mensaje;
+
+        System.out.println(mensaje.getMensaje());
+
+        return this.mensaje;
+    }
+
+    public ArrayList<Documento> sendIndizacion(Mensaje enviando){
+        try {
+            Socket socket = new Socket(Host, puerto);
+
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            objectOutputStream.writeObject(enviando);
+
+            this.lista_contiene_palabra = (ArrayList<Documento>)objectInputStream.readObject();
+
+            socket.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+
+        return lista_contiene_palabra;
+    }
+
+    public void sendMensaje(Mensaje mensaje){
+        try {
+            Socket socket = new Socket(Host, puerto);
+
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            objectOutputStream.writeObject(mensaje);
+
+            Mensaje returnMensaje = (Mensaje) objectInputStream.readObject();
+
+            System.out.println(returnMensaje.getMensaje()+"ubica");
+            socket.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

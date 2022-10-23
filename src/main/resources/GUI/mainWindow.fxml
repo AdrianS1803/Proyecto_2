@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,7 +10,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -22,9 +22,9 @@
                         <Font name="Freestyle Script" size="40.0" />
                     </font>
                 </Label>
-                <BorderPane fx:id="pane_archivos" layoutX="21.0" layoutY="98.0" prefHeight="354.0" prefWidth="266.0">
+                <BorderPane fx:id="pane_archivos" layoutX="21.0" layoutY="98.0" prefHeight="292.0" prefWidth="266.0">
                     <top>
-                        <TextField fx:id="textField_search_word" promptText="Buscador..." BorderPane.alignment="CENTER" />
+                        <TextField fx:id="searchWord_textField" promptText="Buscador..." BorderPane.alignment="CENTER" />
                     </top>
                     <bottom>
                         <Button fx:id="search_button" mnemonicParsing="false" onAction="#search_word" text="Buscar" BorderPane.alignment="CENTER" />
@@ -37,7 +37,13 @@
                   </VBox>
                </center>
                 </BorderPane>
-            <Button fx:id="test" layoutX="128.0" layoutY="478.0" mnemonicParsing="false" onAction="#indizar" text="test" />
+            <Button fx:id="indizar_button" layoutX="128.0" layoutY="404.0" mnemonicParsing="false" onAction="#indizar" text="Indizar" />
+            <AnchorPane layoutX="44.0" layoutY="453.0" prefHeight="34.0" prefWidth="220.0">
+               <children>
+                  <TextField fx:id="moveFile_textField" layoutY="5.0" promptText="Ruta" />
+                  <Button fx:id="moveFile_button" layoutX="168.0" layoutY="5.0" mnemonicParsing="false" onAction="#moveFile" text="Añadir" />
+               </children>
+            </AnchorPane>
             </children></AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
@@ -53,12 +59,13 @@
                         <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                 </MenuButton>
-                <Pane layoutX="19.0" layoutY="162.0" prefHeight="316.0" prefWidth="562.0">
-                    <children>
-                        <ScrollBar layoutX="533.0" layoutY="14.0" orientation="VERTICAL" prefHeight="292.0" prefWidth="14.0" />
-                  <Label fx:id="test_label" layoutX="14.0" layoutY="26.0" prefHeight="17.0" prefWidth="287.0" />
-                    </children>
-                </Pane>
+            <ChoiceBox fx:id="choiceBox_Algoritmo" layoutX="14.0" layoutY="69.0" prefWidth="150.0" />
+            <VBox layoutX="18.0" layoutY="136.0" prefHeight="322.0" prefWidth="562.0">
+               <children>
+                        <ScrollBar layoutX="5.0" orientation="VERTICAL" prefHeight="339.0" prefWidth="14.0" />
+                  <Label fx:id="test_label" prefHeight="17.0" prefWidth="287.0" />
+               </children>
+            </VBox>
             </children>
         </AnchorPane>
     </items>

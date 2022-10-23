@@ -1,47 +1,19 @@
 package Socket;
 
+import Logica.Documento;
+import Logica.Mensaje;
 import Logica.Parse;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Server {
-
-    /*public static void main(String[] args){
-        ServerSocket server = null;
-        Socket socket = null;
-        int puerto = 9000;
-
-        DataOutputStream salida;
-        DataInputStream entrada;
-
-        //BufferedReader entrada;
-
-        try {
-            server = new ServerSocket(puerto);
-            System.out.println("Cliente conectado");
-
-            while (true){
-                socket = server.accept();
-
-                entrada = new DataInputStream(socket.getInputStream());
-                salida = new DataOutputStream(socket.getOutputStream());
-
-                String mensaje = entrada.readUTF();
-
-                System.out.println(mensaje);
-
-                salida.writeUTF("Server: "+mensaje);
-
-                socket.close();
-                System.out.println("Cliente desconectado");
-            }
-
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }*/
+    private LinkedList<Documento> linkedList_documento;
+    private ArrayList<Documento> lista_contiene_palabra = new ArrayList<>();
     private int puerto;
     private ServerSocket server = null;
     private Socket socket = null;
@@ -49,42 +21,94 @@ public class Server {
     public Server(Integer puerto){
         this.puerto = puerto;
     }
-    public void iniciar(){
-        DataOutputStream salida;
-        DataInputStream entrada;
+    public void iniciar() throws IOException, ClassNotFoundException {
+        server = new ServerSocket(puerto);
+        System.out.println("Servidor iniciado");
 
-        //BufferedReader entrada;
-
-        try {
-            server = new ServerSocket(puerto);
+        while (true){
+            socket = server.accept();
             System.out.println("Cliente conectado");
 
-            while (true){
-                socket = server.accept();
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
-                entrada = new DataInputStream(socket.getInputStream());
-                salida = new DataOutputStream(socket.getOutputStream());
+            Mensaje mensaje = (Mensaje)objectInputStream.readObject();
 
-                String mensaje = entrada.readUTF();
-
-                System.out.println(mensaje);
-
-                String resultado = ir_parse(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaTxt.txt"), mensaje);
-
-                salida.writeUTF("Server: "+ resultado);
+            if (mensaje.getMensaje2() == null){
+                System.out.println("No indi");
 
 
-                socket.close();
-                System.out.println("Cliente desconectado");
+                //search_word(mensaje.getMensaje());
+
+                mensaje.setMensaje("Server" + mensaje.getMensaje());
+
+                objectOutputStream.writeObject(mensaje);
+                System.out.println("Cliete Desconectado");
+
+            }else {
+                if (mensaje.getMensaje2().equals("Indizando")){
+                    System.out.println("Ind");
+                    indizar();
+                    System.out.println("Indizacion completada");
+                    objectOutputStream.writeObject(lista_contiene_palabra);
+
+                    System.out.println("Cliete Desconectado");
+                }
             }
-
-        }catch (Exception e){
-            System.out.println(e);
         }
     }
-    private String ir_parse(File file, String searching) throws FileNotFoundException {
+
+
+    private Documento ir_parse(File file, String searching) throws IOException, InvalidFormatException {
         Parse parse = new Parse();
         return parse.parseDocument(file, searching);
+    }
+    private void indizar(){
+        File ruta = new File("Archivos");
+
+        String[] archives_name = ruta.list();
+        LinkedList<Documento> lista_temp = new LinkedList<>();
+
+        for (int i=0; i<archives_name.length; i++){
+
+            File file = new File(ruta.getAbsolutePath(), archives_name[i]); //Directorio en el que esta y el nombre del archivo en el que voy en loop
+
+            if (file.isDirectory()){
+                String[] archivos_subcarpeta = file.list();
+
+                for (int j=0;j<archivos_subcarpeta.length;j++){
+                    File sub_file = new File(file.getAbsolutePath(), archivos_subcarpeta[j]);
+
+                    Documento documento = new Documento();
+                    documento.setRuta(sub_file.getAbsolutePath());
+                    lista_temp.add(documento);
+                }
+            }else {
+                Documento documento = new Documento();
+                documento.setRuta(file.getAbsolutePath());
+                lista_temp.add(documento);
+            }
+        }
+        for (int i = 0; i <= lista_temp.size()-1; i++){
+            System.out.println(lista_temp.get(i).getRuta());
+        }
+
+        this.linkedList_documento = lista_temp;
+    }
+    private void search_word(String searching_word){
+        for (int i = 0; i<=linkedList_documento.size()-1; i++){
+            this.lista_contiene_palabra.add(linkedList_documento.get(i));
+        }
+
+
+        /*for (int i = 0; i<=linkedList_documento.size()-1; i++){
+            if (searching_word.in(linkedList_documento.get(i).getArbol)){ //No se como se pone esta linea
+                //que la busque en el arbol
+                this.lista_contiene_palabra.add(linkedList_documento.get(i))
+
+            }
+        }*/
+
     }
 
 }

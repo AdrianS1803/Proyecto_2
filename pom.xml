@@ -38,6 +38,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.ayvytr</groupId>
+            <artifactId>Logger</artifactId>
+            <version>3.3.1</version>
+        </dependency>
     </dependencies>
 
     <build>
