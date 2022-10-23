@@ -3,13 +3,13 @@ package ArbolBinario;
 public class ArbolBinarioNodo {
    private String dato;
 
-    private Integer ocurrencias;
+    private Integer concurrencias;
     private ArbolBinarioNodo leftchild;
     private ArbolBinarioNodo rightchild;
 
-    public ArbolBinarioNodo(String data, Integer ocurrencias) {
+    public ArbolBinarioNodo(String data, Integer concurrencias) {
         this.dato = data;
-        this.ocurrencias = ocurrencias;
+        this.concurrencias = concurrencias;
         this.leftchild = null;
         this.rightchild = null;
     }

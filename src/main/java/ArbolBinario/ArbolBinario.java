@@ -7,8 +7,8 @@ public class ArbolBinario{
         root = null;
     }
 
-    public void insertNode(String data, Integer ourrencias){
-        ArbolBinarioNodo newNode = new ArbolBinarioNodo(data, ourrencias);
+    public void insertNode(String data, Integer concurrencias){
+        ArbolBinarioNodo newNode = new ArbolBinarioNodo(data, concurrencias);
         if(root == null){
             root = newNode;
         }else{
