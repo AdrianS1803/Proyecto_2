@@ -9,5 +9,5 @@ public class testAVl {
         arbol.insert(17, 2);
         arbol.insert(5, 1);
         arbol.preOrden(arbol.getRoot());
-    } 
+    }
 }
