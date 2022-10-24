@@ -1,18 +1,30 @@
 package GUI;
 
+import Logica.Documento;
+import Logica.Mensaje;
 import Socket.Cliente;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class WindowMainController {
+public class WindowMainController implements Initializable {
     @FXML
     private Label test_label;
     @FXML
@@ -22,14 +34,68 @@ public class WindowMainController {
     @FXML
     private Button search_button;
     @FXML
-    private Button test;
+    private Button indizar_button;
     @FXML
-    private TextField textField_search_word;
+    private Button moveFile_button;
+    @FXML
+    private Button deleteFile_button;
+    @FXML
+    private ChoiceBox<String> choiceBox_Algoritmo;
+    @FXML
+    private TextField searchWord_textField;
+    @FXML
+    private TextField moveFile_textField;
+    @FXML
+    private VBox vBox_search_word;
     private Stage stage;
+    private ArrayList<Documento> lista_contiene_palabra = new ArrayList<>();
+    private String searching_word = "";
+    private String[] algoritmos = {"Nombre", "Fecha", "Palabras"};
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        choiceBox_Algoritmo.getItems().addAll(algoritmos);
+        choiceBox_Algoritmo.setOnAction(this::ChoiceBox_Algoritmo_Selection);
+    }
+
+    private void ChoiceBox_Algoritmo_Selection(Event event) {
+//Esto habra que cambiarlo
+        /*this.searching_word = choiceBox_Algoritmo.getValue();
+        System.out.println(searching_word);
+
+
+        Cliente cliente = new Cliente("192.168.1.184",9000);
+        Mensaje mensaje = new Mensaje(null, searching_word);
+
+
+        test_label.setText(cliente.sendSearch(mensaje).getMensaje());*/
+    }
 
     @FXML
     private void closeApp(ActionEvent event) {
         this.stage.close();
+    }
+    @FXML
+    private void moveFile(){
+        File file = new File(moveFile_textField.getText());
+        File carpeta = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos");
+
+        String carpeta_ruta = carpeta.getAbsolutePath() + "\\" + file.getName();
+        System.out.println(carpeta_ruta);
+
+        try {
+            Files.move(file.toPath(), Path.of(carpeta_ruta), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    @FXML
+    private void deleteFile(){
+        File carpeta = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos");
+        File file = new File(carpeta.getAbsolutePath()+"\\"+moveFile_textField.getText());
+
+        //No se elimina en tiempo real
+        file.deleteOnExit();
     }
     @FXML
     private void search_word(){
@@ -38,12 +104,40 @@ public class WindowMainController {
         //Sebas Ip
         //Sebas Ip
 
-        Cliente cliente = new Cliente("192.168.100.7",9000);
 
-        test_label.setText(cliente.send(textField_search_word.getText()));
+        Cliente cliente = new Cliente("192.168.1.184",9000);
+        this.searching_word = searchWord_textField.getText();
+        Mensaje mensaje = new Mensaje(searching_word,null);
+
+        lista_contiene_palabra = cliente.sendSearch(mensaje);
+
+
+        //----------------
+        vBox_search_word.getChildren().clear();
+        Label[] labels = new Label[lista_contiene_palabra.size()];
+
+        for (int i = 0; i<=lista_contiene_palabra.size()-1; i++){
+            labels[i] = new Label();
+            vBox_search_word.getChildren().add(labels[i]);
+            labels[i].setText(lista_contiene_palabra.get(i).getRuta());
+        }
+
+        //---------------------
+
+        //vBox_search_word_llenar(cliente.sendSearch(mensaje));
+        searchWord_textField.clear();
     }
+
+
+
     @FXML
     private void indizar(){
+        Cliente cliente = new Cliente("192.168.1.184",9000);
+        Mensaje mensaje = new Mensaje(null, "Indizando");
+
+        cliente.sendIndizacion(mensaje);
+
+
         pane_archivos.getChildren().clear();
         File ruta = new File("Archivos");
         archivos.setText(ruta.getName());
@@ -66,8 +160,17 @@ public class WindowMainController {
                 }
             }
 
+        }
+    }
+    private void vBox_search_word_llenar(ArrayList<Documento> lista_contiene_palabra){
+        Label[] labels = new Label[lista_contiene_palabra.size()];
+        for (int i = 0; i<=lista_contiene_palabra.size(); i++){
+            labels[i] = new Label();
+            vBox_search_word.getChildren().add(labels[i]);
+            labels[i].setText(lista_contiene_palabra.get(i).getNombre());
 
         }
+
     }
 
 
@@ -77,6 +180,12 @@ public class WindowMainController {
     public void show(){
         stage.show();
     }
-
-
+    private String getFileExtension(File file) {
+        String name = file.getName();
+        int lastIndexOf = name.lastIndexOf(".");
+        if (lastIndexOf == -1) {
+            return ""; // empty extension
+        }
+        return name.substring(lastIndexOf);
+    }
 }

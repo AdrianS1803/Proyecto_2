@@ -9,8 +9,8 @@ public class ArbolBinario{
     public ArbolBinarioNodo getRoot(){
         return this.root;
     }
-    public void insertNode(String data, Integer concurrencias){
-        ArbolBinarioNodo newNode = new ArbolBinarioNodo(data, concurrencias);
+    public void insertNode(String data){
+        ArbolBinarioNodo newNode = new ArbolBinarioNodo(data);
         if(root == null){
             root = newNode;
         }else{
@@ -50,7 +50,7 @@ public class ArbolBinario{
         return identificador;
     }
 
-    public void preOrden(ArbolBinarioNodo root){
+    public void preOrden(ArbolBinarioNodo root){//Arreglar ocurrencias
         if(root != null){
             System.out.println(root.getData() + root.getConcurrencias() + ", ");
             preOrden(root.getLeftchild());
@@ -61,7 +61,7 @@ public class ArbolBinario{
     public void inOrden(ArbolBinarioNodo root){
         if(root != null){
             inOrden(root.getLeftchild());
-            System.out.println(root.getData() + root.getConcurrencias() + ", ");
+            System.out.println(root.getData() + ", ");
             inOrden(root.getRightchild());
         }
     }

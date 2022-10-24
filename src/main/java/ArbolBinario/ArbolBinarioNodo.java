@@ -7,9 +7,9 @@ public class ArbolBinarioNodo {
     private ArbolBinarioNodo leftchild;
     private ArbolBinarioNodo rightchild;
 
-    public ArbolBinarioNodo(String data, Integer concurrencias) {
+    public ArbolBinarioNodo(String data) {
         this.dato = data;
-        this.concurrencias = concurrencias;
+
         this.leftchild = null;
         this.rightchild = null;
     }

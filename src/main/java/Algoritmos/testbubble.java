@@ -6,5 +6,6 @@ public class testbubble {
         Integer arrayPrueba[] = {40,6,7,8,100,5,3,80};
         ordenar.BubbleSort(arrayPrueba);
         ordenar.mostrar(arrayPrueba);
+
     }
 }
