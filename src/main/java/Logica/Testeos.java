@@ -1,13 +1,39 @@
 package Logica;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import java.io.*;
 import java.util.LinkedList;
 
 public class Testeos {
     private static LinkedList<Documento> linkedList_documento = new LinkedList<Documento>();
 
-    public static void main(String[] args) throws IOException {
-        File ruta = new File("Archivos");
+    public static void main(String[] args) throws IOException, InvalidFormatException {
+
+       /*Parse parse = new Parse();
+       Documento documento = new Documento();
+       documento.setRuta("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaTxt.txt");
+       parse.parseTxt(documento);
+
+       documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());*/
+
+
+
+        Parse parse = new Parse();
+        Documento documento = new Documento();
+        documento.setRuta("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaDocx.docx");
+        parse.parseDocs(documento);
+
+        documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());
+
+
+
+
+
+
+
+
+        /*File ruta = new File("Archivos");
 
         String[] archives_name = ruta.list();
         LinkedList<Documento> lista_temp = new LinkedList<>();
@@ -36,6 +62,6 @@ public class Testeos {
             System.out.println(lista_temp.get(i).getRuta());
         }
 
-        linkedList_documento = lista_temp;
+        linkedList_documento = lista_temp;*/
     }
 }

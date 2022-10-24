@@ -2,7 +2,7 @@ package ArbolBinario;
 
 public class abtest {
     public static void main(String[] args){
-        ArbolBinario arbol = new ArbolBinario();
+        /*ArbolBinario arbol = new ArbolBinario();
         arbol.insertNode("hola", 3);
         arbol.insertNode("adios", 3);
         arbol.insertNode("mi", 3);
@@ -10,6 +10,6 @@ public class abtest {
         arbol.insertNode("agua", 3);
         //arbol.preOrden(arbol.getRoot());
         //arbol.inOrden(arbol.getRoot());
-       arbol.postOrden(arbol.getRoot());
+       arbol.postOrden(arbol.getRoot());*/
     }
 }

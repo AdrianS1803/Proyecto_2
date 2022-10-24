@@ -1,6 +1,6 @@
 package Logica;
 
-import ArbolBinario.ArbolBinario;
+import ArbolBinario.*;
 
 import java.io.Serializable;
 
@@ -10,6 +10,7 @@ public class Documento implements Serializable {
     private String fecha;
     private Integer numero_palabras;
     private ArbolBinario arbolBinario;
+    private AVL_new avl_new;
     //private AVL avl;
     public Documento(){}
 
@@ -17,6 +18,7 @@ public class Documento implements Serializable {
     public ArbolBinario getArbolBinario(){
         return this.arbolBinario;
     }
+    public AVL_new getAvl_new(){return this.avl_new;}
     public String getNombre(){
         return this.nombre;
     }
@@ -37,4 +39,6 @@ public class Documento implements Serializable {
     public void setNumero_palabras(Integer numero_palabras) {
         this.numero_palabras = numero_palabras;
     }
+    public void setArbolBinario(ArbolBinario arbolBinario){this.arbolBinario = arbolBinario;}
+    public void setAvl_new(AVL_new avl_new){this.avl_new = avl_new;}
 }

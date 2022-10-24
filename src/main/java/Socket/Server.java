@@ -8,6 +8,8 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -67,11 +69,11 @@ public class Server {
     }
 
 
-    private Documento ir_parse(File file, String searching) throws IOException, InvalidFormatException {
+    /*private Documento ir_parse(File file, String searching) throws IOException, InvalidFormatException {
         Parse parse = new Parse();
         return parse.parseDocument(file, searching);
-    }
-    private void indizar(){
+    }*/
+    private void indizar() throws IOException {
         File ruta = new File("Archivos");
 
         String[] archives_name = ruta.list();
@@ -91,6 +93,12 @@ public class Server {
                     //-----------Setea los datos
                     documento.setRuta(sub_file.getAbsolutePath());
                     documento.setNombre(sub_file.getName());
+                    //documento.setArbolBinario();
+                    //documento.setAvl_new();
+
+
+                    BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+                    documento.setFecha(String.valueOf(attr.creationTime()));
                     //----------------
                     lista_temp.add(documento);
                 }
@@ -105,6 +113,10 @@ public class Server {
         }
 
         this.linkedList_documento = lista_temp;
+    }
+
+    private void crearArbolBinario(){
+
     }
     private void search_word(String searching_word){
         for (int i = 0; i<=linkedList_documento.size()-1; i++){
