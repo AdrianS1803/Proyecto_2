@@ -38,6 +38,8 @@ public class WindowMainController implements Initializable {
     @FXML
     private Button moveFile_button;
     @FXML
+    private Button deleteFile_button;
+    @FXML
     private ChoiceBox<String> choiceBox_Algoritmo;
     @FXML
     private TextField searchWord_textField;
@@ -88,6 +90,14 @@ public class WindowMainController implements Initializable {
         }
     }
     @FXML
+    private void deleteFile(){
+        File carpeta = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos");
+        File file = new File(carpeta.getAbsolutePath()+"\\"+moveFile_textField.getText());
+
+        //No se elimina en tiempo real
+        file.deleteOnExit();
+    }
+    @FXML
     private void search_word(){
         //Adrian Ip aparta "192.168.1.184"
         //Adrian Ip casa "192.168.5.171"
@@ -95,11 +105,24 @@ public class WindowMainController implements Initializable {
         //Sebas Ip
 
 
-        Cliente cliente = new Cliente("192.168.5.171",9000);
+        Cliente cliente = new Cliente("192.168.1.184",9000);
         this.searching_word = searchWord_textField.getText();
         Mensaje mensaje = new Mensaje(searching_word,null);
 
-        test_label.setText(cliente.sendSearch(mensaje).getMensaje());
+        lista_contiene_palabra = cliente.sendSearch(mensaje);
+
+
+        //----------------
+        vBox_search_word.getChildren().clear();
+        Label[] labels = new Label[lista_contiene_palabra.size()];
+
+        for (int i = 0; i<=lista_contiene_palabra.size()-1; i++){
+            labels[i] = new Label();
+            vBox_search_word.getChildren().add(labels[i]);
+            labels[i].setText(lista_contiene_palabra.get(i).getRuta());
+        }
+
+        //---------------------
 
         //vBox_search_word_llenar(cliente.sendSearch(mensaje));
         searchWord_textField.clear();
@@ -109,7 +132,7 @@ public class WindowMainController implements Initializable {
 
     @FXML
     private void indizar(){
-        Cliente cliente = new Cliente("192.168.5.171",9000);
+        Cliente cliente = new Cliente("192.168.1.184",9000);
         Mensaje mensaje = new Mensaje(null, "Indizando");
 
         cliente.sendIndizacion(mensaje);

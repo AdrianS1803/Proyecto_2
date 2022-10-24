@@ -20,7 +20,7 @@ public class Cliente {
         this.puerto = puerto;
     }
 
-    public Mensaje sendSearch(Mensaje enviando){
+    public ArrayList<Documento> sendSearch(Mensaje enviando){
         try {
             Socket socket = new Socket(Host, puerto);
 
@@ -28,18 +28,16 @@ public class Cliente {
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
             objectOutputStream.writeObject(enviando);
-            System.out.println(mensaje.getMensaje2());
-
-            this.mensaje = (Mensaje)objectInputStream.readObject();
+            //----------
+            lista_contiene_palabra = (ArrayList<Documento>)objectInputStream.readObject();
+            //---------
 
             socket.close();
         }catch (Exception e){
             System.out.println(e);
         }
 
-        System.out.println(mensaje.getMensaje());
-
-        return this.mensaje;
+        return lista_contiene_palabra;
     }
 
     public ArrayList<Documento> sendIndizacion(Mensaje enviando){

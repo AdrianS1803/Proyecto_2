@@ -35,14 +35,22 @@ public class Server {
             Mensaje mensaje = (Mensaje)objectInputStream.readObject();
 
             if (mensaje.getMensaje2() == null){
+                ////---------------------------Estoy aqui, objetivo que compare los arboles y retorne el array con solo las palabras que se ocupa
                 System.out.println("No indi");
+                lista_contiene_palabra.clear();
+                for(int i = 0; i<=linkedList_documento.size()-1; i++){
+                    lista_contiene_palabra.add(linkedList_documento.get(i));
+                }
 
+                ArrayList<Documento> lista_mensaje = lista_contiene_palabra;
+                objectOutputStream.writeObject(lista_mensaje);
 
-                //search_word(mensaje.getMensaje());
+                /*mensaje.setMensaje("Server: " + mensaje.getMensaje());
 
-                mensaje.setMensaje("Server" + mensaje.getMensaje());
+                System.out.println(mensaje.getMensaje());
+                Mensaje server_mensaje = new Mensaje(mensaje.getMensaje(), mensaje.getMensaje2());
 
-                objectOutputStream.writeObject(mensaje);
+                objectOutputStream.writeObject(server_mensaje);*/
                 System.out.println("Cliete Desconectado");
 
             }else {
@@ -80,7 +88,10 @@ public class Server {
                     File sub_file = new File(file.getAbsolutePath(), archivos_subcarpeta[j]);
 
                     Documento documento = new Documento();
+                    //-----------Setea los datos
                     documento.setRuta(sub_file.getAbsolutePath());
+                    documento.setNombre(sub_file.getName());
+                    //----------------
                     lista_temp.add(documento);
                 }
             }else {

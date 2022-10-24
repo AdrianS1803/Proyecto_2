@@ -98,8 +98,10 @@ public class AVL {
         }
         if((subNode.getAVLLeftchild() == null) && (subNode.getAVLRightchild() != null)){
             subNode.setFactorEquilibrio(subNode.getAVLLeftchild().getfactorEquilibrio() + 1);
+
         }else if((subNode.getAVLRightchild() == null) && (subNode.getAVLLeftchild() != null)){
             subNode.setFactorEquilibrio(subNode.getAVLLeftchild().getfactorEquilibrio() + 1);
+
         }else{
             subNode.setFactorEquilibrio(Math.max(getFE(subNode.getAVLLeftchild()), getFE(subNode.getAVLRightchild())) + 1);
         }
