@@ -14,10 +14,6 @@ public class ArbolBinarioNodo {
         this.rightchild = null;
     }
 
-    public Integer getConcurrencias() {
-        return concurrencias;
-    }
-
     public String getData(){
         return this.dato;
     }
