@@ -15,7 +15,17 @@ public class testAVl {
 
         String palabra1 = "ave";
         String palabra2 = "zorro";
-        System.out.println(comparaPalabra(palabra1, palabra2));
+        System.out.println(palabra1.compareTo(palabra2));
+
+        //System.out.println(comparaPalabra(palabra1, palabra2));
+
+       /* AVL_new avl_new = new AVL_new();
+
+        avl_new.insertar(1);
+
+        System.out.println(avl_new.buscar(1, avl_new.obtenerRaiz()).dato);*/
+
+
     }
     public static String comparaPalabra(String palabra1, String palabra2){
         int resultado = palabra1.compareTo(palabra2);

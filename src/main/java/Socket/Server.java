@@ -23,41 +23,44 @@ public class Server {
     public Server(Integer puerto){
         this.puerto = puerto;
     }
-    public void iniciar() throws IOException, ClassNotFoundException {
+    public void iniciar() throws IOException, ClassNotFoundException, InvalidFormatException {
         server = new ServerSocket(puerto);
         System.out.println("Servidor iniciado");
 
         while (true){
             socket = server.accept();
-            System.out.println("Cliente conectado");
+            System.out.println("\nCliente conectado");
 
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
             Mensaje mensaje = (Mensaje)objectInputStream.readObject();
 
-            if (mensaje.getMensaje2() == null){
+
+            if (mensaje.getMensaje2() == null){//Si es una busqueda
                 ////---------------------------Estoy aqui, objetivo que compare los arboles y retorne el array con solo las palabras que se ocupa
-                System.out.println("No indi");
-                lista_contiene_palabra.clear();
-                for(int i = 0; i<=linkedList_documento.size()-1; i++){
-                    lista_contiene_palabra.add(linkedList_documento.get(i));
-                }
+                System.out.println("Busqueda de " + mensaje.getMensaje());
+
+                search_word(mensaje.getMensaje());
 
                 ArrayList<Documento> lista_mensaje = lista_contiene_palabra;
+
+                
+                /*System.out.println(linkedList_documento.get(0).getNombre());
+                System.out.println(linkedList_documento.get(0).getArbolBinario().getRoot());
+
+                ArrayList<Documento> lista_mensaje = new ArrayList<Documento>();
+                Documento documento = new Documento();
+                documento.setNombre("Test");
+                lista_mensaje.add(documento);*/
+
                 objectOutputStream.writeObject(lista_mensaje);
-
-                /*mensaje.setMensaje("Server: " + mensaje.getMensaje());
-
-                System.out.println(mensaje.getMensaje());
-                Mensaje server_mensaje = new Mensaje(mensaje.getMensaje(), mensaje.getMensaje2());
-
-                objectOutputStream.writeObject(server_mensaje);*/
                 System.out.println("Cliete Desconectado");
 
-            }else {
+            }else {//Si es una indizacion
+
                 if (mensaje.getMensaje2().equals("Indizando")){
-                    System.out.println("Ind");
+                    System.out.println("Indizacion: ");
                     indizar();
                     System.out.println("Indizacion completada");
                     objectOutputStream.writeObject(lista_contiene_palabra);
@@ -68,13 +71,10 @@ public class Server {
         }
     }
 
-
-    /*private Documento ir_parse(File file, String searching) throws IOException, InvalidFormatException {
-        Parse parse = new Parse();
-        return parse.parseDocument(file, searching);
-    }*/
-    private void indizar() throws IOException {
+    private void indizar() throws IOException, InvalidFormatException {
         File ruta = new File("Archivos");
+
+        Parse parse = new Parse();
 
         String[] archives_name = ruta.list();
         LinkedList<Documento> lista_temp = new LinkedList<>();
@@ -90,48 +90,49 @@ public class Server {
                     File sub_file = new File(file.getAbsolutePath(), archivos_subcarpeta[j]);
 
                     Documento documento = new Documento();
+
                     //-----------Setea los datos
+
                     documento.setRuta(sub_file.getAbsolutePath());
                     documento.setNombre(sub_file.getName());
-                    //documento.setArbolBinario();
-                    //documento.setAvl_new();
 
-
-                    BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+                    BasicFileAttributes attr = Files.readAttributes(sub_file.toPath(), BasicFileAttributes.class);
                     documento.setFecha(String.valueOf(attr.creationTime()));
+
+
+                    parse.parseDocument(documento);
                     //----------------
                     lista_temp.add(documento);
                 }
             }else {
                 Documento documento = new Documento();
+                // Setea los datos------------
                 documento.setRuta(file.getAbsolutePath());
+                documento.setNombre(file.getName());
+
+                BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+                documento.setFecha(String.valueOf(attr.creationTime()));
+
+                parse.parseDocument(documento);
+
+                //------------------------
                 lista_temp.add(documento);
             }
-        }
-        for (int i = 0; i <= lista_temp.size()-1; i++){
-            System.out.println(lista_temp.get(i).getRuta());
         }
 
         this.linkedList_documento = lista_temp;
     }
 
-    private void crearArbolBinario(){
-
-    }
     private void search_word(String searching_word){
+        lista_contiene_palabra.clear();
+
         for (int i = 0; i<=linkedList_documento.size()-1; i++){
-            this.lista_contiene_palabra.add(linkedList_documento.get(i));
-        }
+            if (linkedList_documento.get(i).getArbolBinario().search(searching_word)!=null){
+                System.out.println(linkedList_documento.get(i).getArbolBinario().getRoot().getData());
 
-
-        /*for (int i = 0; i<=linkedList_documento.size()-1; i++){
-            if (searching_word.in(linkedList_documento.get(i).getArbol)){ //No se como se pone esta linea
-                //que la busque en el arbol
-                this.lista_contiene_palabra.add(linkedList_documento.get(i))
-
+                lista_contiene_palabra.add(linkedList_documento.get(i));
             }
-        }*/
-
+        }
     }
 
 }

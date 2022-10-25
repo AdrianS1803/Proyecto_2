@@ -119,7 +119,7 @@ public class WindowMainController implements Initializable {
         for (int i = 0; i<=lista_contiene_palabra.size()-1; i++){
             labels[i] = new Label();
             vBox_search_word.getChildren().add(labels[i]);
-            labels[i].setText(lista_contiene_palabra.get(i).getRuta());
+            labels[i].setText(lista_contiene_palabra.get(i).getNombre());
         }
 
         //---------------------

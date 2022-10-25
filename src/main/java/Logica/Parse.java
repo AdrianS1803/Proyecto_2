@@ -22,16 +22,20 @@ public class Parse {
         File file = new File(documento.getRuta());
         if (getFileExtension(file).equals(".txt")){
              parseTxt(documento);
+            System.out.println("Se logro parsear txt de " + documento.getNombre());
 
-            //----------------------Voy por aqui en las pruebas
         }else if (getFileExtension(file).equals(".pdf")){
-            //mensaje = parsePdf(file);
-        }else if (getFileExtension(file).equals(".docs")){
+            parsePdf(documento);
+            System.out.println("Se logro parsear pdf de " + documento.getNombre());
+
+        }else if (getFileExtension(file).equals(".docx")){
             parseDocs(documento);
+            System.out.println("Se logro parsear docs de " + documento.getNombre());
 
         }else {
-            System.out.println("Error en parse document");
+            System.out.println("Error en parse document de " + documento.getNombre());
         }
+
     }
     public void parseTxt(Documento documento) throws IOException {
         ArbolBinario arbolBinario = new ArbolBinario();
@@ -50,8 +54,11 @@ public class Parse {
         documento.setArbolBinario(arbolBinario);
         documento.setNumero_palabras(numero_palabras);
 
+        System.out.println(documento.getNombre());
+        System.out.println(documento.getArbolBinario().getRoot());
+
     }
-    public String parsePdf(File file){
+    public void parsePdf(Documento documento){
         //NO SE PORQUE NO FUNCIONA
 
         /*// Create a content handler
@@ -92,7 +99,14 @@ public class Parse {
         System.out.println("Extracting contents :"
                 + contenthandler.toString());*/
 
-        return file.getAbsolutePath();
+        ArbolBinario arbolBinario = new ArbolBinario();
+        arbolBinario.insertNode("PDF");
+
+        documento.setArbolBinario(arbolBinario);
+        documento.setNumero_palabras(1);
+
+
+
     }
     public void parseDocs(Documento documento) throws IOException, InvalidFormatException {
         //ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...

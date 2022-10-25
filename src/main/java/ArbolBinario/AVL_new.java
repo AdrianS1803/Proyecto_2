@@ -1,6 +1,8 @@
 package ArbolBinario;
 
-public class AVL_new {
+import java.io.Serializable;
+
+public class AVL_new implements Serializable {
     private AVL_Nodo_new raiz;
 
     public AVL_new(){
