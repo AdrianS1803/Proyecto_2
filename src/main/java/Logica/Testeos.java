@@ -3,6 +3,8 @@ package Logica;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.LinkedList;
 
 public class Testeos {
@@ -20,9 +22,19 @@ public class Testeos {
 
 
         Parse parse = new Parse();
+
+        File file = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaDocx.docx");
+
         Documento documento = new Documento();
         documento.setRuta("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaDocx.docx");
         parse.parseDocs(documento);
+
+        BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+        documento.setFecha(String.valueOf(attr.creationTime()));
+
+        System.out.println(documento.getFecha());
+
+        //Convertir numero a fecha
 
         //documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());
 

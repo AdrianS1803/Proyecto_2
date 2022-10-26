@@ -59,6 +59,23 @@ public class Cliente {
 
         return lista_contiene_palabra;
     }
+    //Retornara un array
+    public void sendAlgoritmo(Mensaje enviando){
+        try {
+            Socket socket = new Socket(Host, puerto);
+
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            objectOutputStream.writeObject(enviando);
+            ArrayList<Documento> arrayList = new ArrayList<>();
+            arrayList = (ArrayList<Documento>)objectInputStream.readObject();
+
+            socket.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
     public void sendMensaje(Mensaje mensaje){
         try {

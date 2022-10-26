@@ -1,8 +1,10 @@
 package GUI;
 
 import Logica.Documento;
+
 import Logica.Mensaje;
 import Socket.Cliente;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -61,15 +63,14 @@ public class WindowMainController implements Initializable {
 
     private void ChoiceBox_Algoritmo_Selection(Event event) {
 //Esto habra que cambiarlo
-        /*this.searching_word = choiceBox_Algoritmo.getValue();
+        this.searching_word = choiceBox_Algoritmo.getValue();
         System.out.println(searching_word);
 
 
         Cliente cliente = new Cliente("192.168.1.184",9000);
         Mensaje mensaje = new Mensaje(null, searching_word);
 
-
-        test_label.setText(cliente.sendSearch(mensaje).getMensaje());*/
+        cliente.sendAlgoritmo(mensaje);
     }
 
     @FXML
@@ -214,7 +215,7 @@ public class WindowMainController implements Initializable {
 
         }
     }
-    private void vBox_search_word_llenar(ArrayList<Documento> lista_contiene_palabra){
+    /*private void vBox_search_word_llenar(ArrayList<Documento> lista_contiene_palabra){
         Label[] labels = new Label[lista_contiene_palabra.size()];
         for (int i = 0; i<=lista_contiene_palabra.size(); i++){
             labels[i] = new Label();
@@ -223,7 +224,7 @@ public class WindowMainController implements Initializable {
 
         }
 
-    }
+    }*/
 
 
     public void setStage(Stage stage) {

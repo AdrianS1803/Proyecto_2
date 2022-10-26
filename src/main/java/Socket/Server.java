@@ -59,6 +59,13 @@ public class Server {
 
             }else {//Si es una indizacion
 
+                //Esto se borra---------
+                Documento documento = new Documento();
+                documento.setNombre("Se borra");
+                ArrayList<Documento> arrayList = new  ArrayList<>();
+                arrayList.add(documento);
+                //---------------
+
                 if (mensaje.getMensaje2().equals("Indizando")){
                     System.out.println("Indizacion: ");
                     indizar();
@@ -66,7 +73,39 @@ public class Server {
                     objectOutputStream.writeObject(lista_contiene_palabra);
 
                     System.out.println("Cliete Desconectado");
+
+                } else if (mensaje.getMensaje2().equals("Palabras")) {
+                    System.out.println("RadixSort: ");
+
+
+                    System.out.println("RadixSort terminado");
+                    //Cambiar
+                    objectOutputStream.writeObject(arrayList);
+
+                    System.out.println("Cliente Desconectado");
+
+                } else if (mensaje.getMensaje2().equals("Fecha")) {
+                    System.out.println("BubbleSort: ");
+
+
+                    System.out.println("BubbleSort Terminado");
+                    objectOutputStream.writeObject(arrayList);
+
+                    System.out.println("Client Desconectado");
+
+                } else if (mensaje.getMensaje2().equals("Nombre")) {
+                    System.out.println("QuickSort: ");
+
+
+                    System.out.println("QuickSort Terminado");
+                    objectOutputStream.writeObject(arrayList);
+
+                    System.out.println("Cliente Desconectado");
+
+                }else {
+                    System.out.println("Error");
                 }
+
             }
         }
     }
