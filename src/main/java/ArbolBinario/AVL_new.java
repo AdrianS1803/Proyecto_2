@@ -66,7 +66,8 @@ public class AVL_new implements Serializable {
 
     public AVL_Nodo_new insertarAVL(AVL_Nodo_new nuevo, AVL_Nodo_new subArbol){
         AVL_Nodo_new nuevoPadre = subArbol;
-        if (nuevo.dato < subArbol.dato){
+        System.out.println(nuevo.dato+" < "+subArbol.dato); //nuevo.dato.compareTo(subArbol.dato)<0
+        if (nuevo.dato < subArbol.dato){///
             if (subArbol.hijoIzquierdo == null){
                 subArbol.hijoIzquierdo = nuevo;
             }else {
@@ -79,13 +80,13 @@ public class AVL_new implements Serializable {
                     }
                 }
             }
-        } else if (nuevo.dato > subArbol.dato) {
+        } else if (nuevo.dato > subArbol.dato) {/////nuevo.dato.compareTo(subArbol.dato)>0
             if (subArbol.hijoDerecho == null){
                 subArbol.hijoDerecho = nuevo;
             }else {
                 subArbol.hijoDerecho = insertarAVL(nuevo , subArbol.hijoDerecho);
                 if ((obtenerFactorEquilibrio(subArbol.hijoDerecho) - obtenerFactorEquilibrio(subArbol.hijoIzquierdo) == 2)){
-                    if (nuevo.dato > subArbol.hijoDerecho.dato){
+                    if (nuevo.dato > subArbol.hijoDerecho.dato){/////nuevo.dato.compareTo(subArbol.dato)>0
                         nuevoPadre = rotacionDerecha(subArbol);
                     }else {
                         nuevoPadre = rotacionDobleDerecha(subArbol);
