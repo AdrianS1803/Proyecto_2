@@ -24,7 +24,9 @@ public class Testeos {
         documento.setRuta("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaDocx.docx");
         parse.parseDocs(documento);
 
-        documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());
+        //documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());
+
+        System.out.println(documento.getArbolBinario().search("Prueba"));
 
 
 

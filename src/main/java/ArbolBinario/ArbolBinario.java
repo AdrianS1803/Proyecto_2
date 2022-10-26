@@ -1,6 +1,8 @@
 package ArbolBinario;
 
-public class ArbolBinario{
+import java.io.Serializable;
+
+public class ArbolBinario implements Serializable {
     private ArbolBinarioNodo root;
 
     public ArbolBinario(){
@@ -18,7 +20,7 @@ public class ArbolBinario{
            ArbolBinarioNodo idetificador = root;
            while (true){
                padre = idetificador;
-               if(data.equals(idetificador.getData())){///preguntar
+               if(data.compareTo(idetificador.getData())<0){///preguntar
                    idetificador = idetificador.getLeftchild();
                    if(idetificador == null){
                        padre.setLeftchild(newNode);
@@ -37,15 +39,19 @@ public class ArbolBinario{
 
     public ArbolBinarioNodo search(String data){
         ArbolBinarioNodo identificador = root;
-        while(identificador.getData() != data){
-            if(data.equals(identificador.getData())){////preguntar
-                identificador.setLeftchild(identificador);
+
+        while( identificador.getData() != data ){
+            if (data.compareTo(identificador.getData()) == 0){
+                return identificador;
+                }
+            if (data.compareTo(identificador.getData())<0){ // El caso en que es  menor es cuando compareTo da negativo
+                identificador = identificador.getLeftchild();
+
             }else{
-                identificador.setRightchild(identificador);
+                identificador = identificador.getRightchild();
             }
             if(identificador == null){
-               return null;
-            }
+                return null;}
         }
         return identificador;
     }
@@ -73,5 +79,6 @@ public class ArbolBinario{
             System.out.println(root.getData() + root.getConcurrencias() + ", ");
         }
     }
+
 
 }

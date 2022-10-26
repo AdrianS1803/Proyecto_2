@@ -7,12 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -114,13 +115,64 @@ public class WindowMainController implements Initializable {
 
         //----------------
         vBox_search_word.getChildren().clear();
-        Label[] labels = new Label[lista_contiene_palabra.size()];
+
+        VBox[] vBoxes = new VBox[lista_contiene_palabra.size()];
+        for (int i = 0; i<=lista_contiene_palabra.size()-1; i++){
+            vBoxes[i] = new VBox();
+            vBox_search_word.getChildren().add(vBoxes[i]);
+
+
+            Label labelNombre = new Label();
+            labelNombre.setText(lista_contiene_palabra.get(i).getNombre());
+
+            vBoxes[i].getChildren().add(labelNombre);
+
+            //-----------------
+            HBox hBox_button_searchText = new HBox();
+
+            Label label_searchText = new Label();
+            label_searchText.setText("Futura palabra buscada");
+
+            Button button_openDocument = new Button();
+            button_openDocument.setText("Abrir");
+
+            hBox_button_searchText.getChildren().add(label_searchText);
+            hBox_button_searchText.getChildren().add(button_openDocument);
+
+            vBoxes[i].getChildren().add(hBox_button_searchText);
+            //----------------------------------
+
+            //---------------
+            HBox hBox_arboles = new HBox();
+
+            Label label_arbolBinario = new Label();
+            label_arbolBinario.setText(lista_contiene_palabra.get(i).getArbolBinario().getRoot().getData()); // Hacer el metodo devolver comparaciones
+
+            Label label_AVL = new Label();
+            label_AVL.setText("Futuro resultado AVL");///Poner este resultado
+
+            Label label_numPalabras = new Label();
+            label_numPalabras.setText(lista_contiene_palabra.get(i).getNumero_palabras().toString());
+
+            hBox_arboles.getChildren().add(label_arbolBinario);
+            hBox_arboles.getChildren().add(label_AVL);
+            hBox_arboles.getChildren().add(label_numPalabras);
+
+            vBoxes[i].getChildren().add(hBox_arboles);
+
+            int color = 200;
+            vBoxes[i].setBackground(new Background(new BackgroundFill(Color.rgb(color,color,color),CornerRadii.EMPTY, Insets.EMPTY)));
+            //-------------------------------------
+
+        }
+
+        /*Label[] labels = new Label[lista_contiene_palabra.size()];
 
         for (int i = 0; i<=lista_contiene_palabra.size()-1; i++){
             labels[i] = new Label();
             vBox_search_word.getChildren().add(labels[i]);
-            labels[i].setText(lista_contiene_palabra.get(i).getRuta());
-        }
+            labels[i].setText(lista_contiene_palabra.get(i).getNombre());
+        }*/
 
         //---------------------
 

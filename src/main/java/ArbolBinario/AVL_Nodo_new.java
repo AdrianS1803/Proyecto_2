@@ -1,6 +1,8 @@
 package ArbolBinario;
 
-public class AVL_Nodo_new {
+import java.io.Serializable;
+
+public class AVL_Nodo_new implements Serializable {
     int dato;
     int factor_equilibrio;
     AVL_Nodo_new hijoIzquierdo;

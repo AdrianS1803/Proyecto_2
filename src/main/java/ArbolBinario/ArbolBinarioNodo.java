@@ -1,6 +1,8 @@
 package ArbolBinario;
 
-public class ArbolBinarioNodo {
+import java.io.Serializable;
+
+public class ArbolBinarioNodo implements Serializable {
    private String dato;
 
     private Integer concurrencias;
