@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Documento implements Serializable {
     private String ruta;
-    private static String nombre;
+    private String nombre;
     private String fecha;
     private Integer numero_palabras;
     private ArbolBinario arbolBinario;

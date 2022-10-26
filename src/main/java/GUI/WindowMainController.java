@@ -102,11 +102,11 @@ public class WindowMainController implements Initializable {
     private void search_word(){
         //Adrian Ip aparta "192.168.1.184"
         //Adrian Ip casa "192.168.5.171"
-        //Sebas Ip casa 192.168.100.183
+        //Sebas Ip
         //Sebas Ip
 
 
-        Cliente cliente = new Cliente("192.168.100.183",9000);
+        Cliente cliente = new Cliente("192.168.1.184",9000);
         this.searching_word = searchWord_textField.getText();
         Mensaje mensaje = new Mensaje(searching_word,null);
 
@@ -184,7 +184,7 @@ public class WindowMainController implements Initializable {
 
     @FXML
     private void indizar(){
-        Cliente cliente = new Cliente("192.168.100.183",9000);
+        Cliente cliente = new Cliente("192.168.1.184",9000);
         Mensaje mensaje = new Mensaje(null, "Indizando");
 
         cliente.sendIndizacion(mensaje);
