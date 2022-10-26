@@ -1,29 +1,29 @@
 package Algoritmos;
 
 public class BubbleSort {
-    private Integer i;
-    private Integer j;
-    private Integer ordenador;
+    private Long i;
+    private Long j;
+    private Long ordenador;
 
     public BubbleSort(){
-        this.i = 0;
-        this.j = 0;
-        this.ordenador = 0;
+        this.i = Long.valueOf(0);
+        this.j = Long.valueOf(0);
+        this.ordenador = Long.valueOf(0);
     }
 
-    public void BubbleSort(Integer[] array){
-        for(i = 0; i < array.length; i++){
+    public void BubbleSort(Long[] array){
+        for(i = Long.valueOf(0); i < array.length; i++){
             for(j = i+1; j < array.length; j++){
-                if(array[i] > array[j]){
-                    ordenador = array[i];
-                    array[i] = array[j];
-                    array[j] = ordenador;
+                if(array[Math.toIntExact(i)] > array[Math.toIntExact(j)]){
+                    ordenador = array[Math.toIntExact(i)];
+                    array[Math.toIntExact(i)] = array[Math.toIntExact(j)];
+                    array[Math.toIntExact(j)] = ordenador;
                 }
             }
         }
     }
 
-    public void mostrar(Integer[] array){
+    public void mostrar(Long[] array){
         Integer k;
         for(k = 0; k < array.length; k++){
             System.out.println("["+array[k]+"]");

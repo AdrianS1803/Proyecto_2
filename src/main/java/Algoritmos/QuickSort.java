@@ -15,7 +15,6 @@ public class QuickSort {
         length = names.length;
         quickSort(0, length - 1);
     }
-
     /*
      * This method implements in-place quicksort algorithm recursively.
      */
