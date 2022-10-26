@@ -1,49 +1,60 @@
+//tomado de: https://www.lawebdelprogramador.com/foros/Java/1731852-Como-puedo-usar-Quicksort-para-ordenar-nombres-alfabeticamente.html
 package Algoritmos;
-
+import Logica.*;
 public class QuickSort {
-    private Integer i;
-    private Integer j;
-    private Integer pivot;
-
-    public QuickSort(){
-        this.i = 0;
-        this.j = 0;
-        this.pivot = 0;
+    private String input[];
+    private int length;
+    public void sort(String[] names) {
+        if (names == null || names.length == 0) {
+            return;
+        }
+        this.input = names;
+        length = names.length;
+        quickSort(0, length - 1);
     }
 
-    public void quickSort(Integer[] array, Integer first, Integer last){
-        Integer auxiliar = 0;
-        i = first;
-        j = last;
-        pivot = array[(first+last)/2];
-        do{
-            while(array[i] < pivot){
+    private void quickSort(int low, int high) {
+        int i = low;
+        int j = high;
+
+        // pivot is middle index
+        String pivot = input[low + (high - low) / 2];
+
+        // Divide into two arrays
+        while (i <= j) {
+            // full string ...
+            while (input[i].compareToIgnoreCase(pivot) < 0) {
                 i++;
             }
-            while(array[j] > pivot){
+            while (input[j].compareToIgnoreCase(pivot) > 0) {
                 j--;
             }
-            if(i <= j){
-                auxiliar = array[i];
-                array[i] = array[j];
-                array[j] = auxiliar;
+
+            if (i <= j) {
+                swap(i, j);
+                // move index to next position on both sides
                 i++;
                 j--;
             }
-        }while(i <= j);
-        if(first < j){
-            quickSort(array, first, j);
         }
-        if(i < last){
-            quickSort(array, i, last);
+
+        // calls quickSort() method recursively
+        if (low < j) {
+            quickSort(low, j);
+        }
+
+        if (i < high) {
+            quickSort(i, high);
         }
     }
+    private int getInitial(String input) {
+        String values [] = input.split(" ");
+        return (int) values[0].charAt(0) + (int) values[1].charAt(0);
+    }
 
-    public void mostrarQuick(Integer[] array){
-        Integer k;
-        for(k = 0; k < array.length; k++){
-            System.out.println("["+array[k]+"]");
-        }
-        System.out.println();
+    private void swap(int i, int j) {
+        String temp = input[i];
+        input[i] = input[j];
+        input[j] = temp;
     }
 }
