@@ -1,10 +1,12 @@
 package Logica;
 
+import Algoritmos.QuickSort;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Testeos {
@@ -19,9 +21,31 @@ public class Testeos {
 
        documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());*/
 
+        ArrayList<Documento> arrayList = new ArrayList<>();
+        Documento documentose = new Documento();
+        documentose.setNombre("marco");
+
+        Documento documentosea = new Documento();
+        documentosea.setNombre("adria");
+
+        Documento documentosear = new Documento();
+        documentosear.setNombre("seb");
+
+        arrayList.add(documentose);
+        arrayList.add(documentosea);
+        arrayList.add(documentosear);
+
+        QuickSort quickSort = new QuickSort();
+
+        quickSort.sort(arrayList);
+
+        for (int i = 0; i<arrayList.size(); i++){
+            System.out.println(arrayList.get(i).getNombre());
+        }
 
 
-        Parse parse = new Parse();
+
+        /*Parse parse = new Parse();
 
         File file = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaDocx.docx");
 
@@ -38,7 +62,7 @@ public class Testeos {
 
         //documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());
 
-        System.out.println(documento.getArbolBinario().search("Prueba"));
+        System.out.println(documento.getArbolBinario().search("Prueba"));*/
 
 
 

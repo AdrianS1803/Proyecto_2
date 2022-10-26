@@ -1,18 +1,22 @@
 //https://www.lawebdelprogramador.com/foros/Java/1731852-Como-puedo-usar-Quicksort-para-ordenar-nombres-alfabeticamente.html
 package Algoritmos;
 
+import Logica.Documento;
+
+import java.util.ArrayList;
+
 public class QuickSort {
-    private String input[];
+    private Documento input[]; ///Array list
     private int length;
 
-    public void sort(String[] names) {
+    public void sort(ArrayList<Documento> names) {
 
-        if (names == null || names.length == 0) {
+        if (names == null || names.size() == 0) {
             return;
         }
 
-        this.input = names;
-        length = names.length;
+        this.input = names.toArray(new Documento[0]);
+        length = names.size();
         quickSort(0, length - 1);
     }
 
@@ -24,15 +28,15 @@ public class QuickSort {
         int j = high;
 
         // pivot is middle index
-        String pivot = input[low + (high - low) / 2];
+        String pivot = input[low + (high - low) / 2].getNombre();
 
         // Divide into two arrays
         while (i <= j) {
             // full string ...
-            while (input[i].compareToIgnoreCase(pivot) < 0) {
+            while (input[i].getNombre().compareToIgnoreCase(pivot) < 0) {
                 i++;
             }
-            while (input[j].compareToIgnoreCase(pivot) > 0) {
+            while (input[j].getNombre().compareToIgnoreCase(pivot) > 0) {
                 j--;
             }
 
@@ -60,7 +64,7 @@ public class QuickSort {
     }
 
     private void swap(int i, int j) {
-        String temp = input[i];
+        Documento temp = input[i];
         input[i] = input[j];
         input[j] = temp;
     }

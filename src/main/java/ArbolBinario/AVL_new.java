@@ -3,6 +3,7 @@ package ArbolBinario;
 import java.io.Serializable;
 
 public class AVL_new implements Serializable {
+    private int comparaciones = 0;
     private AVL_Nodo_new raiz;
 
     public AVL_new(){
@@ -11,15 +12,19 @@ public class AVL_new implements Serializable {
     public AVL_Nodo_new obtenerRaiz(){
         return raiz;
     }
+    public int getComparaciones(){return this.comparaciones;}
 
-    public AVL_Nodo_new buscar(int dato, AVL_Nodo_new raiz){
+    public AVL_Nodo_new buscar(String dato, AVL_Nodo_new raiz){
         if (raiz == null){
             return null;
         } else if (raiz.dato == dato) {
+            comparaciones++;
             return raiz;
-        } else if (raiz.dato < dato) {
+        } else if (raiz.dato.compareTo(dato)<0) {//raiz.dato < dato
+            comparaciones++;
             return buscar(dato, raiz.hijoDerecho);
         }else {
+            comparaciones++;
             return buscar(dato, raiz.hijoIzquierdo);
         }
     }
@@ -66,27 +71,27 @@ public class AVL_new implements Serializable {
 
     public AVL_Nodo_new insertarAVL(AVL_Nodo_new nuevo, AVL_Nodo_new subArbol){
         AVL_Nodo_new nuevoPadre = subArbol;
-        System.out.println(nuevo.dato+" < "+subArbol.dato); //nuevo.dato.compareTo(subArbol.dato)<0
-        if (nuevo.dato < subArbol.dato){///
+        //System.out.println(nuevo.dato+" < "+subArbol.dato); //nuevo.dato.compareTo(subArbol.dato)<0
+        if (nuevo.dato.compareTo(subArbol.dato)<0){///nuevo.dato < subArbol.dato
             if (subArbol.hijoIzquierdo == null){
                 subArbol.hijoIzquierdo = nuevo;
             }else {
                 subArbol.hijoIzquierdo = insertarAVL(nuevo, subArbol.hijoIzquierdo);
                 if ((obtenerFactorEquilibrio(subArbol.hijoIzquierdo) - obtenerFactorEquilibrio(subArbol.hijoDerecho) == 2)){
-                    if (nuevo.dato < subArbol.hijoIzquierdo.dato){
+                    if (nuevo.dato.compareTo(subArbol.hijoIzquierdo.dato)<0){///nuevo.dato < subArbol.hijoIzquierdo.dato
                         nuevoPadre = rotacionIzquierda(subArbol);
                     }else {
                         nuevoPadre = rotacionDobleIzquierda(subArbol);
                     }
                 }
             }
-        } else if (nuevo.dato > subArbol.dato) {/////nuevo.dato.compareTo(subArbol.dato)>0
+        } else if (nuevo.dato.compareTo(subArbol.dato)>0) {/////nuevo.dato > subArbol.dato
             if (subArbol.hijoDerecho == null){
                 subArbol.hijoDerecho = nuevo;
             }else {
                 subArbol.hijoDerecho = insertarAVL(nuevo , subArbol.hijoDerecho);
                 if ((obtenerFactorEquilibrio(subArbol.hijoDerecho) - obtenerFactorEquilibrio(subArbol.hijoIzquierdo) == 2)){
-                    if (nuevo.dato > subArbol.hijoDerecho.dato){/////nuevo.dato.compareTo(subArbol.dato)>0
+                    if (nuevo.dato.compareTo(subArbol.hijoDerecho.dato)>0){/////nuevo.dato > subArbol.hijoDerecho.dato
                         nuevoPadre = rotacionDerecha(subArbol);
                     }else {
                         nuevoPadre = rotacionDobleDerecha(subArbol);
@@ -108,7 +113,7 @@ public class AVL_new implements Serializable {
         return nuevoPadre;
     }
 
-    public void insertar(int dato){
+    public void insertar(String dato){
         AVL_Nodo_new nuevo = new AVL_Nodo_new(dato);
         if (raiz == null){
             raiz = nuevo;
@@ -141,4 +146,5 @@ public class AVL_new implements Serializable {
 
         }
     }
+
 }

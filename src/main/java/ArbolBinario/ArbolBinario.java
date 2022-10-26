@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class ArbolBinario implements Serializable {
     private ArbolBinarioNodo root;
+    private int comparaciones = 0;
 
     public ArbolBinario(){
         root = null;
@@ -11,6 +12,7 @@ public class ArbolBinario implements Serializable {
     public ArbolBinarioNodo getRoot(){
         return this.root;
     }
+    public int getComparaciones(){return this.comparaciones;}
     public void insertNode(String data){
         ArbolBinarioNodo newNode = new ArbolBinarioNodo(data);
         if(root == null){
@@ -42,15 +44,19 @@ public class ArbolBinario implements Serializable {
 
         while( identificador.getData() != data ){
             if (data.compareTo(identificador.getData()) == 0){
+                comparaciones++;
                 return identificador;
                 }
             if (data.compareTo(identificador.getData())<0){ // El caso en que es  menor es cuando compareTo da negativo
                 identificador = identificador.getLeftchild();
+                comparaciones++;
 
             }else{
                 identificador = identificador.getRightchild();
+                comparaciones++;
             }
             if(identificador == null){
+                comparaciones++;
                 return null;}
         }
         return identificador;
