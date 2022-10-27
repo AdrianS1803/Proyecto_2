@@ -1,5 +1,8 @@
 package Socket;
 
+import Algoritmos.BubbleSort;
+import Algoritmos.QuickSort;
+import Algoritmos.RadixSort;
 import Logica.Documento;
 import Logica.Mensaje;
 import Logica.Parse;
@@ -45,31 +48,16 @@ public class Server {
 
                 ArrayList<Documento> lista_mensaje = lista_contiene_palabra;
 
-                
-                /*System.out.println(linkedList_documento.get(0).getNombre());
-                System.out.println(linkedList_documento.get(0).getArbolBinario().getRoot());
-
-                ArrayList<Documento> lista_mensaje = new ArrayList<Documento>();
-                Documento documento = new Documento();
-                documento.setNombre("Test");
-                lista_mensaje.add(documento);*/
-
                 objectOutputStream.writeObject(lista_mensaje);
                 System.out.println("Cliete Desconectado");
 
-            }else {//Si es una indizacion
-
-                //Esto se borra---------
-                Documento documento = new Documento();
-                documento.setNombre("Se borra");
-                ArrayList<Documento> arrayList = new  ArrayList<>();
-                arrayList.add(documento);
-                //---------------
+            }else {//Si es uno es una busqueda de palabra
 
                 if (mensaje.getMensaje2().equals("Indizando")){
                     System.out.println("Indizacion: ");
                     indizar();
                     System.out.println("Indizacion completada");
+
                     objectOutputStream.writeObject(lista_contiene_palabra);
 
                     System.out.println("Cliete Desconectado");
@@ -77,28 +65,42 @@ public class Server {
                 } else if (mensaje.getMensaje2().equals("Palabras")) {
                     System.out.println("RadixSort: ");
 
+                    //search_word(mensaje.getMensaje());
+                    RadixSort radixSort = new RadixSort();
+                    lista_contiene_palabra = radixSort.sort(lista_contiene_palabra);
 
                     System.out.println("RadixSort terminado");
-                    //Cambiar
-                    objectOutputStream.writeObject(arrayList);
+
+                    ArrayList<Documento> lista_mensaje = lista_contiene_palabra;
+                    objectOutputStream.writeObject(lista_mensaje);
 
                     System.out.println("Cliente Desconectado");
 
                 } else if (mensaje.getMensaje2().equals("Fecha")) {
                     System.out.println("BubbleSort: ");
 
+                    //search_word(mensaje.getMensaje());
+                    BubbleSort bubbleSort = new BubbleSort();
+                    lista_contiene_palabra = bubbleSort.sort(lista_contiene_palabra);
 
                     System.out.println("BubbleSort Terminado");
-                    objectOutputStream.writeObject(arrayList);
+
+                    ArrayList<Documento> lista_mensaje = lista_contiene_palabra;
+                    objectOutputStream.writeObject(lista_mensaje);
 
                     System.out.println("Client Desconectado");
 
                 } else if (mensaje.getMensaje2().equals("Nombre")) {
                     System.out.println("QuickSort: ");
 
+                    QuickSort quickSort = new QuickSort();
+
+                    lista_contiene_palabra = quickSort.sort(lista_contiene_palabra);
 
                     System.out.println("QuickSort Terminado");
-                    objectOutputStream.writeObject(arrayList);
+
+                    ArrayList<Documento> lista_mensaje = lista_contiene_palabra;
+                    objectOutputStream.writeObject(lista_mensaje);
 
                     System.out.println("Cliente Desconectado");
 
@@ -118,6 +120,8 @@ public class Server {
         String[] archives_name = ruta.list();
         LinkedList<Documento> lista_temp = new LinkedList<>();
 
+        ArrayList<Documento> lista_temp2 = new ArrayList<>();
+
         for (int i=0; i<archives_name.length; i++){
 
             File file = new File(ruta.getAbsolutePath(), archives_name[i]); //Directorio en el que esta y el nombre del archivo en el que voy en loop
@@ -136,12 +140,13 @@ public class Server {
                     documento.setNombre(sub_file.getName());
 
                     BasicFileAttributes attr = Files.readAttributes(sub_file.toPath(), BasicFileAttributes.class);
-                    documento.setFecha(String.valueOf(attr.creationTime()));
+                    documento.setFecha(String.valueOf(attr.creationTime().toMillis()/1000));
 
 
                     parse.parseDocument(documento);
                     //----------------
                     lista_temp.add(documento);
+                    lista_temp2.add(documento);
                 }
             }else {
                 Documento documento = new Documento();
@@ -150,16 +155,18 @@ public class Server {
                 documento.setNombre(file.getName());
 
                 BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-                documento.setFecha(String.valueOf(attr.creationTime()));
+                documento.setFecha(String.valueOf(attr.creationTime().toMillis()/1000));
 
                 parse.parseDocument(documento);
 
                 //------------------------
                 lista_temp.add(documento);
+                lista_temp2.add(documento);
             }
         }
 
         this.linkedList_documento = lista_temp;
+        this.lista_contiene_palabra = lista_temp2;
     }
 
     private void search_word(String searching_word){
@@ -167,7 +174,6 @@ public class Server {
 
         for (int i = 0; i<=linkedList_documento.size()-1; i++){
             if (linkedList_documento.get(i).getArbolBinario().search(searching_word)!=null){
-                System.out.println(linkedList_documento.get(i).getArbolBinario().getRoot().getData());
 
                 lista_contiene_palabra.add(linkedList_documento.get(i));
             }

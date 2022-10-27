@@ -7,9 +7,10 @@ import java.util.ArrayList;
 public class BubbleSort {
     private int i;
     private int j;
+    public BubbleSort(){}
     private Documento ordenador;
 
-    public ArrayList<Documento> BubbleSort(ArrayList<Documento> array){
+    public ArrayList<Documento> sort(ArrayList<Documento> array){
 
         for(i = 0; i < array.size(); i++){
             for(j = i+1; j < array.size(); j++){

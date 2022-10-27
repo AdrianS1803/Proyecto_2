@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class Cliente {
 
     private ArrayList<Documento> lista_contiene_palabra = new ArrayList<>();
-    private Mensaje mensaje;
     private String Host;
     private int puerto;
 
@@ -49,7 +48,7 @@ public class Cliente {
 
             objectOutputStream.writeObject(enviando);
 
-            this.lista_contiene_palabra = (ArrayList<Documento>)objectInputStream.readObject();
+            lista_contiene_palabra = (ArrayList<Documento>)objectInputStream.readObject();
 
             socket.close();
         }catch (Exception e){
@@ -60,7 +59,11 @@ public class Cliente {
         return lista_contiene_palabra;
     }
     //Retornara un array
-    public void sendAlgoritmo(Mensaje enviando){
+    public ArrayList<Documento> sendAlgoritmo(Mensaje enviando){
+        return sendMensaje(enviando);
+    }
+
+    private ArrayList<Documento> sendMensaje(Mensaje enviando) {
         try {
             Socket socket = new Socket(Host, puerto);
 
@@ -68,30 +71,14 @@ public class Cliente {
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
             objectOutputStream.writeObject(enviando);
-            ArrayList<Documento> arrayList = new ArrayList<>();
-            arrayList = (ArrayList<Documento>)objectInputStream.readObject();
+
+            lista_contiene_palabra = (ArrayList<Documento>) objectInputStream.readObject();
 
             socket.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-    }
 
-    public void sendMensaje(Mensaje mensaje){
-        try {
-            Socket socket = new Socket(Host, puerto);
-
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-
-            objectOutputStream.writeObject(mensaje);
-
-            Mensaje returnMensaje = (Mensaje) objectInputStream.readObject();
-
-            System.out.println(returnMensaje.getMensaje()+"ubica");
-            socket.close();
-        }catch (Exception e){
-            System.out.println(e);
-        }
+        return lista_contiene_palabra;
     }
 }

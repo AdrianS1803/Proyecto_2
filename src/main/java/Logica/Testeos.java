@@ -27,7 +27,7 @@ public class Testeos {
 
        documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());*/
 
-        ArrayList<Documento> arrayList = new ArrayList<>();
+        /*ArrayList<Documento> arrayList = new ArrayList<>();
         Documento documentose = new Documento();
         documentose.setNombre("marco");
 
@@ -50,7 +50,7 @@ public class Testeos {
 
         for (int i = 0; i<arrayList.size(); i++){
             System.out.println(arrayList.get(i).getNombre());
-        }
+        }*/
 
 
 
@@ -70,7 +70,7 @@ public class Testeos {
 
         ////////////////////////////////////////////////////////////////////
         /*/
-        ArrayList<Documento> arrayFechas = new ArrayList<>();
+        /*ArrayList<Documento> arrayFechas = new ArrayList<>();
 
         File doc1 = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\PruebaDocx.docx");
         Documento documento1 = new Documento();
@@ -78,13 +78,13 @@ public class Testeos {
         documento1.setFecha(String.valueOf(attr1.creationTime().toMillis()/1000));
         arrayFechas.add(documento1);
 
-        File doc2 = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\avion.txt");
+        File doc2 = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\PruebaDocx.txt");
         Documento documento2 = new Documento();
         BasicFileAttributes attr2 = Files.readAttributes(doc2.toPath(), BasicFileAttributes.class);
         documento2.setFecha(String.valueOf(attr2.creationTime().toMillis()/1000));
         arrayFechas.add(documento2);
 
-        File doc3 = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\hola.txt");
+        File doc3 = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\PruebaDocx.txt");
         Documento documento3 = new Documento();
         BasicFileAttributes attr3 = Files.readAttributes(doc3.toPath(), BasicFileAttributes.class);
         documento3.setFecha(String.valueOf(attr3.creationTime().toMillis()/1000));
@@ -93,7 +93,7 @@ public class Testeos {
         System.out.println("desordenado " +arrayFechas);
         BubbleSort ordenar = new BubbleSort();
         ordenar.BubbleSort(arrayFechas);
-        System.out.println("ordenado " +arrayFechas);
+        System.out.println("ordenado " +arrayFechas);*/
         ///////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////
@@ -103,26 +103,32 @@ public class Testeos {
         //File docQuick1 = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\PruebaDocx.docx");
         Documento documentoQuick1 = new Documento();
         //BasicFileAttributes attrQuick1 = Files.readAttributes(doc2.toPath(), BasicFileAttributes.class);
-        documentoQuick1.setNombre("hola");
+        documentoQuick1.setNombre("avion");
         arrayNombres.add(documentoQuick1);
 
         Documento documentoQuick2 = new Documento();
-        documentoQuick2.setNombre("avioneta");
+        documentoQuick2.setNombre("hola");
         arrayNombres.add(documentoQuick2);
 
         Documento documentoQuick3 = new Documento();
-        documentoQuick3.setNombre("parasito");
+        documentoQuick3.setNombre("TestCarpeta");
         arrayNombres.add(documentoQuick3);
+
+        Documento documentoQuick4 = new Documento();
+        documentoQuick4.setNombre("PruebaTxt");
+        arrayNombres.add(documentoQuick4);
 
         System.out.println("desordenado " +arrayNombres);
         QuickSort ordenarQuick1 = new QuickSort();
         ordenarQuick1.sort(arrayNombres);
-        System.out.println("ordenado " + arrayNombres);
+        System.out.println("ordenado " );
+        for (int i = 0; i<= arrayNombres.size()-1;i++)
+            System.out.println(arrayNombres.get(i).getNombre());
 
 
         ///////////////////////////////////////////////////////////////
         //radixsort
-        ArrayList<Documento> arrayTamano = new ArrayList<>();
+        /*ArrayList<Documento> arrayTamano = new ArrayList<>();
         Documento documentoRadix1 = new Documento();
         //BasicFileAttributes attrQuick1 = Files.readAttributes(doc2.toPath(), BasicFileAttributes.class);
         documentoRadix1.setNumero_palabras(4534);
@@ -139,7 +145,7 @@ public class Testeos {
         System.out.println("desordenado " +arrayTamano);
         RadixSort radixSort = new RadixSort();
         radixSort.RadixSort(arrayTamano);
-        System.out.println("ordenado " + arrayTamano);
+        System.out.println("ordenado " + arrayTamano);*/
 
         //Convertir numero a fecha
 

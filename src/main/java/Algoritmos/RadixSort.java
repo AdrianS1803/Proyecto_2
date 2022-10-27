@@ -5,7 +5,10 @@ import Logica.Documento;
 import java.util.ArrayList;
 
 public class RadixSort {
-    public ArrayList<Documento> RadixSort(ArrayList<Documento> list) {
+    public RadixSort() {
+    }
+
+    public ArrayList<Documento> sort(ArrayList<Documento> list) {
 
         final int NUM_BASE = 10;
 

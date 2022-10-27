@@ -9,6 +9,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Scanner;
 
 import ArbolBinario.ArbolBinario;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
@@ -54,58 +56,29 @@ public class Parse {
         documento.setArbolBinario(arbolBinario);
         documento.setNumero_palabras(numero_palabras);
 
-        System.out.println(documento.getNombre());
-        System.out.println(documento.getArbolBinario().getRoot());
-
     }
-    public void parsePdf(Documento documento){
-        //NO SE PORQUE NO FUNCIONA
-
-        /*// Create a content handler
-        BodyContentHandler contenthandler = new BodyContentHandler();
-
-        // Create a file in local directory
-        File f = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos\\PruebaPDF.pdf");
-
-        // Create a file input stream
-        // on specified path with the created file
-        FileInputStream fstream = new FileInputStream(f);
-
-        // Create an object of type Metadata to use
-        Metadata data = new Metadata();
-
-        // Create a context parser for the pdf document
-        ParseContext context = new ParseContext();
-
-        // PDF document can be parsed using the PDFparser
-        // class
-        PDFParser pdfparser = new PDFParser();
-
-        // Method parse invoked on PDFParser class
-        try {
-            pdfparser.parse(fstream, contenthandler, data,
-                    context);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
-            throw new RuntimeException(e);
-        } catch (TikaException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        // Printing the contents of the pdf document
-        // using toString() method in java
-        System.out.println("Extracting contents :"
-                + contenthandler.toString());*/
-
+    public void parsePdf(Documento documento) throws IOException {
         ArbolBinario arbolBinario = new ArbolBinario();
-        arbolBinario.insertNode("PDF");
+        int numero_palabras = 0;
+
+        File file = new File(documento.getRuta());
+        FileInputStream fileInputStream = new FileInputStream(file);
+        PDDocument pdDocument = PDDocument.load(fileInputStream);
+        PDFTextStripper pdfTextStripper = new PDFTextStripper();
+
+        String alldoc = pdfTextStripper.getText(pdDocument);
+
+        Scanner scanner = new Scanner(alldoc);
+
+        while (scanner.hasNext()){
+            arbolBinario.insertNode(scanner.next());
+
+            numero_palabras++;
+        }
+        scanner.close();
 
         documento.setArbolBinario(arbolBinario);
-        documento.setNumero_palabras(1);
-
-
+        documento.setNumero_palabras(numero_palabras);
 
     }
     public void parseDocs(Documento documento) throws IOException, InvalidFormatException {
@@ -114,7 +87,6 @@ public class Parse {
 
         XWPFDocument docx = new XWPFDocument(OPCPackage.open(file));
         XWPFWordExtractor wordExtractor = new XWPFWordExtractor(docx);
-        System.out.println(wordExtractor.getText());
 
         //-----
         ArbolBinario arbolBinario = new ArbolBinario();

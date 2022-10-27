@@ -54,11 +54,14 @@ public class WindowMainController implements Initializable {
     private ArrayList<Documento> lista_contiene_palabra = new ArrayList<>();
     private String searching_word = "";
     private String[] algoritmos = {"Nombre", "Fecha", "Palabras"};
+    ///------------------Cambiar esto siempre
+    private String ip = "192.168.1.95";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox_Algoritmo.getItems().addAll(algoritmos);
         choiceBox_Algoritmo.setOnAction(this::ChoiceBox_Algoritmo_Selection);
+        indizar();
     }
 
     private void ChoiceBox_Algoritmo_Selection(Event event) {
@@ -67,10 +70,11 @@ public class WindowMainController implements Initializable {
         System.out.println(searching_word);
 
 
-        Cliente cliente = new Cliente("192.168.1.184",9000);
+        Cliente cliente = new Cliente(ip,9000);
         Mensaje mensaje = new Mensaje(null, searching_word);
 
-        cliente.sendAlgoritmo(mensaje);
+        lista_contiene_palabra = cliente.sendAlgoritmo(mensaje);
+        llenar();
     }
 
     @FXML
@@ -103,18 +107,24 @@ public class WindowMainController implements Initializable {
     private void search_word(){
         //Adrian Ip aparta "192.168.1.184"
         //Adrian Ip casa "192.168.5.171"
+        // TEC Ip "172.18.177.16"
         //Sebas Ip
         //Sebas Ip
 
 
-        Cliente cliente = new Cliente("192.168.1.184",9000);
+        Cliente cliente = new Cliente(ip,9000);
         this.searching_word = searchWord_textField.getText();
         Mensaje mensaje = new Mensaje(searching_word,null);
 
         lista_contiene_palabra = cliente.sendSearch(mensaje);
 
 
+        llenar();
+
+    }
+    private void llenar(){
         //----------------
+
         vBox_search_word.getChildren().clear();
 
         VBox[] vBoxes = new VBox[lista_contiene_palabra.size()];
@@ -161,37 +171,40 @@ public class WindowMainController implements Initializable {
 
             vBoxes[i].getChildren().add(hBox_arboles);
 
-            int color = 200;
+            int color = 230;
             vBoxes[i].setBackground(new Background(new BackgroundFill(Color.rgb(color,color,color),CornerRadii.EMPTY, Insets.EMPTY)));
             //-------------------------------------
 
         }
 
-        /*Label[] labels = new Label[lista_contiene_palabra.size()];
-
-        for (int i = 0; i<=lista_contiene_palabra.size()-1; i++){
-            labels[i] = new Label();
-            vBox_search_word.getChildren().add(labels[i]);
-            labels[i].setText(lista_contiene_palabra.get(i).getNombre());
-        }*/
-
-        //---------------------
-
-        //vBox_search_word_llenar(cliente.sendSearch(mensaje));
         searchWord_textField.clear();
     }
 
 
-
     @FXML
     private void indizar(){
-        Cliente cliente = new Cliente("192.168.1.184",9000);
+        Cliente cliente = new Cliente(ip,9000);
         Mensaje mensaje = new Mensaje(null, "Indizando");
-
-        cliente.sendIndizacion(mensaje);
-
+//Probando
+        ArrayList<Documento> archivos_hayados = new ArrayList<>();
+        archivos_hayados = cliente.sendIndizacion(mensaje);
 
         pane_archivos.getChildren().clear();
+
+        Label espacio = new Label();
+        espacio.setText(" ");
+        pane_archivos.getChildren().add(espacio);
+
+        Label[] archivosLabel = new Label[archivos_hayados.size()];
+
+        for (int i = 0; i<=archivos_hayados.size()-1; i++){
+            archivosLabel[i] = new Label();
+            archivosLabel[i].setText(archivos_hayados.get(i).getNombre());
+            pane_archivos.getChildren().add(archivosLabel[i]);
+        }
+
+
+        /*pane_archivos.getChildren().clear();
         File ruta = new File("Archivos");
         archivos.setText(ruta.getName());
         String[] archives_name = ruta.list();
@@ -213,7 +226,7 @@ public class WindowMainController implements Initializable {
                 }
             }
 
-        }
+        }*/
     }
     /*private void vBox_search_word_llenar(ArrayList<Documento> lista_contiene_palabra){
         Label[] labels = new Label[lista_contiene_palabra.size()];

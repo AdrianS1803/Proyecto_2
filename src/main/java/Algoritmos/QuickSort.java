@@ -9,6 +9,7 @@ public class QuickSort {
 
     private ArrayList<Documento> input;
     private int size;
+    public QuickSort(){}
 
     public ArrayList<Documento> sort(ArrayList<Documento> names) {
 
@@ -34,10 +35,10 @@ public class QuickSort {
         // Divide into two arrays
         while (i <= j) {
             // full string ...
-            while (input.get(i).getNombre().compareTo((pivot.getNombre())) < 0) {
+            while (input.get(i).getNombre().toLowerCase().compareTo((pivot.getNombre().toLowerCase())) < 0) {
                 i++;
             }
-            while (input.get(j).getNombre().compareTo((pivot.getNombre())) > 0) {
+            while (input.get(j).getNombre().toLowerCase().compareTo((pivot.getNombre().toLowerCase())) > 0) {
                 j--;
             }
             if (i <= j) {
