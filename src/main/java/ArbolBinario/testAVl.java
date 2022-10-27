@@ -3,8 +3,14 @@ package ArbolBinario;
 public class testAVl {
     public static void main(String[] args){
        AVL_new arbol = new AVL_new();
-        arbol.insertar(10);
-        arbol.insertar(5);
+       arbol.insertar("sebas");
+       arbol.insertar("adrian");
+       arbol.insertar("juan");
+       arbol.insertar("ramon");
+       arbol.insertar("marco");
+        arbol.insertar("babo");
+        arbol.insertar("cortes");
+        arbol.insertar("lolo");
         /*arbol.insertar(13);
         arbol.insertar(1);
         arbol.insertar(6);
@@ -12,10 +18,19 @@ public class testAVl {
         arbol.insertar(16);*/
         //arbol.preOrden(arbol.obtenerRaiz());
 
+        arbol.inOrder(arbol.obtenerRaiz());
+        arbol.buscar("lolo",arbol.obtenerRaiz());
 
-        String palabra1 = "ave";
+
+        System.out.println("\n");
+
+        System.out.println(arbol.getComparaciones());
+
+
+
+        /*String palabra1 = "ave";
         String palabra2 = "zorro";
-        System.out.println(palabra1.compareTo(palabra2));
+        System.out.println(palabra1.compareTo(palabra2));*/
 
         //System.out.println(comparaPalabra(palabra1, palabra2));
 
