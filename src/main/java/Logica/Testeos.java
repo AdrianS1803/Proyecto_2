@@ -1,12 +1,12 @@
 package Logica;
 
-<<<<<<< HEAD
+
 import Algoritmos.BubbleSort;
 import Algoritmos.QuickSort;
 import Algoritmos.RadixSort;
-=======
+
 import Algoritmos.QuickSort;
->>>>>>> main
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.*;
@@ -34,9 +34,9 @@ public class Testeos {
         Documento documentosea = new Documento();
         documentosea.setNombre("adria");
 
-<<<<<<< HEAD
+
         //Parse parse = new Parse();
-=======
+
         Documento documentosear = new Documento();
         documentosear.setNombre("seb");
 
@@ -55,7 +55,7 @@ public class Testeos {
 
 
         /*Parse parse = new Parse();
->>>>>>> main
+
 
         File file = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\PruebaDocx.docx");
 
@@ -67,9 +67,9 @@ public class Testeos {
         documento.setFecha(String.valueOf(attr.creationTime()));
 
 
-<<<<<<< HEAD
+
         ////////////////////////////////////////////////////////////////////
-        //BubbleSort
+        /*/
         ArrayList<Documento> arrayFechas = new ArrayList<>();
 
         File doc1 = new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto2.0\\Proyecto_2\\Archivos\\PruebaDocx.docx");
@@ -140,13 +140,13 @@ public class Testeos {
         RadixSort radixSort = new RadixSort();
         radixSort.RadixSort(arrayTamano);
         System.out.println("ordenado " + arrayTamano);
-=======
+
         //Convertir numero a fecha
 
         //documento.getArbolBinario().inOrden(documento.getArbolBinario().getRoot());
 
-        System.out.println(documento.getArbolBinario().search("Prueba"));*/
->>>>>>> main
+      
+
 
 
 

@@ -6,7 +6,7 @@ import Logica.Documento;
 import java.util.ArrayList;
 
 public class QuickSort {
-<<<<<<< HEAD
+
     private ArrayList<Documento> input;
     private int size;
 
@@ -20,20 +20,6 @@ public class QuickSort {
         size = names.size();
         quickSort(0, size - 1);
         return names;
-=======
-    private Documento input[]; ///Array list
-    private int length;
-
-    public void sort(ArrayList<Documento> names) {
-
-        if (names == null || names.size() == 0) {
-            return;
-        }
-
-        this.input = names.toArray(new Documento[0]);
-        length = names.size();
-        quickSort(0, length - 1);
->>>>>>> main
     }
     /*
      * This method implements in-place quicksort algorithm recursively.
@@ -43,7 +29,7 @@ public class QuickSort {
         int j = high;
 
         // pivot is middle index
-<<<<<<< HEAD
+
         Documento pivot = input.get(low + (high - low) / 2);
         // Divide into two arrays
         while (i <= j) {
@@ -52,23 +38,10 @@ public class QuickSort {
                 i++;
             }
             while (input.get(j).getNombre().compareTo((pivot.getNombre())) > 0) {
-=======
-        String pivot = input[low + (high - low) / 2].getNombre();
-
-        // Divide into two arrays
-        while (i <= j) {
-            // full string ...
-            while (input[i].getNombre().compareToIgnoreCase(pivot) < 0) {
-                i++;
-            }
-            while (input[j].getNombre().compareToIgnoreCase(pivot) > 0) {
->>>>>>> main
                 j--;
             }
-
             if (i <= j) {
                 swap(i, j);
-                // move index to next position on both sides
                 i++;
                 j--;
             }
@@ -85,14 +58,9 @@ public class QuickSort {
     }
 
     private void swap(int i, int j) {
-<<<<<<< HEAD
         Documento temp = input.get(i);
         input.set(i, input.get(j));
         input.set(j, temp);
-=======
-        Documento temp = input[i];
-        input[i] = input[j];
-        input[j] = temp;
->>>>>>> main
+
     }
 }
