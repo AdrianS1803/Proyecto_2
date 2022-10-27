@@ -1,34 +1,25 @@
 package Algoritmos;
 
+import Logica.Documento;
+
+import java.util.ArrayList;
+
 public class BubbleSort {
-    private Long i;
-    private Long j;
-    private Long ordenador;
+    private int i;
+    private int j;
+    private Documento ordenador;
 
-    public BubbleSort(){
-        this.i = Long.valueOf(0);
-        this.j = Long.valueOf(0);
-        this.ordenador = Long.valueOf(0);
-    }
+    public ArrayList<Documento> BubbleSort(ArrayList<Documento> array){
 
-    public void BubbleSort(Long[] array){
-        for(i = Long.valueOf(0); i < array.length; i++){
-            for(j = i+1; j < array.length; j++){
-                if(array[Math.toIntExact(i)] > array[Math.toIntExact(j)]){
-                    ordenador = array[Math.toIntExact(i)];
-                    array[Math.toIntExact(i)] = array[Math.toIntExact(j)];
-                    array[Math.toIntExact(j)] = ordenador;
+        for(i = 0; i < array.size(); i++){
+            for(j = i+1; j < array.size(); j++){
+                if(Integer.parseInt(array.get(i).getFecha()) > Integer.parseInt(array.get(j).getFecha())){
+                    ordenador = array.get(i);
+                    array.set(i, array.get(j));
+                    array.set(j, ordenador);
                 }
             }
-        }
     }
-
-    public void mostrar(Long[] array){
-        Integer k;
-        for(k = 0; k < array.length; k++){
-            System.out.println("["+array[k]+"]");
-        }
-        System.out.println();
+        return array;
     }
-
 }

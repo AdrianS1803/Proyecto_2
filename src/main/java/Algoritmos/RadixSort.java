@@ -1,79 +1,76 @@
-//https://www.geeksforgeeks.org/radix-sort/
 package Algoritmos;
 
-import java.util.Arrays;
+import Logica.Documento;
+
+import java.util.ArrayList;
 
 public class RadixSort {
-    static int getMax(int arr[], int n)
-    {
-        int mx = arr[0];
-        for (int i = 1; i < n; i++)
-            if (arr[i] > mx)
-                mx = arr[i];
-        return mx;
-    }
+    public ArrayList<Documento> RadixSort(ArrayList<Documento> list) {
 
-    // A function to do counting sort of arr[] according to
-    // the digit represented by exp.
-    static void countSort(int arr[], int n, int exp)
-    {
-        int output[] = new int[n]; // output array
-        int i;
-        int count[] = new int[10];
-        Arrays.fill(count, 0);
+        final int NUM_BASE = 10;
 
-        // Store count of occurrences in count[]
-        for (i = 0; i < n; i++)
-            count[(arr[i] / exp) % 10]++;
+        int maximum = 0;
 
-        // Change count[i] so that count[i] now contains
-        // actual position of this digit in output[]
-        for (i = 1; i < 10; i++)
-            count[i] += count[i - 1];
+        ArrayList<ArrayList<Documento>> buckets;
 
-        // Build the output array
-        for (i = n - 1; i >= 0; i--) {
-            output[count[(arr[i] / exp) % 10] - 1] = arr[i];
-            count[(arr[i] / exp) % 10]--;
+        buckets = new ArrayList<ArrayList<Documento>>(NUM_BASE);
+
+        // New buckets are added to the bucket list; one for each digit
+        // in the numeral system of the data being sorted.
+
+        for (int ii = 0; ii < NUM_BASE; ii++) {
+
+            buckets.add(new ArrayList<Documento>());
         }
 
-        // Copy the output array to arr[], so that arr[] now
-        // contains sorted numbers according to current
-        // digit
-        for (i = 0; i < n; i++)
-            arr[i] = output[i];
-    }
+        // Identifying the list item with the most place values.
 
-    // The main function to that sorts arr[] of
-    // size n using Radix Sort
-    static void radixsort(int arr[], int n)
-    {
-        // Find the maximum number to know number of digits
-        int m = getMax(arr, n);
+        for (int ii = 0; ii < list.size(); ii++) {
 
-        // Do counting sort for every digit. Note that
-        // instead of passing digit number, exp is passed.
-        // exp is 10^i where i is current digit number
-        for (int exp = 1; m / exp > 0; exp *= 10)
-            countSort(arr, n, exp);
-    }
+            if (list.get(ii).getNumero_palabras() > maximum) {
 
-    // A utility function to print an array
-    static void print(int arr[], int n)
-    {
-        for (int i = 0; i < n; i++)
-            System.out.print(arr[i] + " ");
-    }
+                maximum = list.get(ii).getNumero_palabras();
+            }
+        }
 
-    // Main driver method
-    public static void main(String[] args)
-    {
-        int arr[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
-        int n = arr.length;
+        // List items are sorted by place value. The place value is
+        // multiplied by the numeric base with each pass of the loop.
 
-        // Function Call
-        radixsort(arr, n);
-        print(arr, n);
+        for (int power = 1; maximum / power != 0; power *= NUM_BASE) {
+
+            for (int ii = 0; ii < list.size(); ii++) {
+
+                // List items are added to the bucket which corresponds
+                // to the place value which they are being sorted by.
+
+                buckets.get(list.get(ii).getNumero_palabras() / power % NUM_BASE).add(list.get(ii));
+            }
+
+            int index = 0;
+
+            for (int ii = 0; ii < buckets.size(); ii++) {
+
+                for (int jj = 0; jj < buckets.get(ii).size(); jj++) {
+
+                    // The buckets, sorted by the current place value
+                    // under consideration, have their values written
+                    // back to original list, overwriting its previous
+                    // contents.
+
+                    list.set(index, buckets.get(ii).get(jj));
+
+                    index++;
+                }
+            }
+
+            // At the end of each pass of the loop, the contents of the
+            // buckets are dumped out.
+
+            for (int ii = 0; ii < buckets.size(); ii++) {
+
+                buckets.get(ii).clear();
+            }
+        }
+        return list;
     }
 }
-

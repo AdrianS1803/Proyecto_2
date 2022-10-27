@@ -1,19 +1,24 @@
 //https://www.lawebdelprogramador.com/foros/Java/1731852-Como-puedo-usar-Quicksort-para-ordenar-nombres-alfabeticamente.html
 package Algoritmos;
 
+import Logica.Documento;
+
+import java.util.ArrayList;
+
 public class QuickSort {
-    private String input[];
-    private int length;
+    private ArrayList<Documento> input;
+    private int size;
 
-    public void sort(String[] names) {
+    public ArrayList<Documento> sort(ArrayList<Documento> names) {
 
-        if (names == null || names.length == 0) {
-            return;
+        if (names == null || names.size() == 0) {
+            return null;
         }
 
         this.input = names;
-        length = names.length;
-        quickSort(0, length - 1);
+        size = names.size();
+        quickSort(0, size - 1);
+        return names;
     }
     /*
      * This method implements in-place quicksort algorithm recursively.
@@ -23,15 +28,14 @@ public class QuickSort {
         int j = high;
 
         // pivot is middle index
-        String pivot = input[low + (high - low) / 2];
-
+        Documento pivot = input.get(low + (high - low) / 2);
         // Divide into two arrays
         while (i <= j) {
             // full string ...
-            while (input[i].compareToIgnoreCase(pivot) < 0) {
+            while (input.get(i).getNombre().compareTo((pivot.getNombre())) < 0) {
                 i++;
             }
-            while (input[j].compareToIgnoreCase(pivot) > 0) {
+            while (input.get(j).getNombre().compareTo((pivot.getNombre())) > 0) {
                 j--;
             }
 
@@ -53,14 +57,9 @@ public class QuickSort {
         }
     }
 
-    private int getInitial(String input) {
-        String values [] = input.split(" ");
-        return (int) values[0].charAt(0) + (int) values[1].charAt(0);
-    }
-
     private void swap(int i, int j) {
-        String temp = input[i];
-        input[i] = input[j];
-        input[j] = temp;
+        Documento temp = input.get(i);
+        input.set(i, input.get(j));
+        input.set(j, temp);
     }
 }
