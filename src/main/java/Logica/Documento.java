@@ -4,6 +4,11 @@ import ArbolBinario.*;
 
 import java.io.Serializable;
 
+/**
+ *@author Sebastían Hernández Bonilla y Adrián Salas Solís
+ *@version v0.1 octubre 2022
+ */
+
 public class Documento implements Serializable {
     private String ruta;
     private String nombre;
@@ -11,9 +16,16 @@ public class Documento implements Serializable {
     private Integer numero_palabras;
     private ArbolBinario arbolBinario;
     private AVL_new avl_new;
-    //private AVL avl;
+
+    /**
+     * Constructor de la clase objeto Documento.
+     */
     public Documento(){}
 
+    /**
+     * Obtiene la ruta del Objeto Documento.
+     * @return String es la ruta del documento.
+     */
     public String getRuta(){return this.ruta;}
     public ArbolBinario getArbolBinario(){
         return this.arbolBinario;

@@ -16,6 +16,10 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ *@author Sebastían Hernández Bonilla y Adrián Salas Solís
+ *@version v0.1 octubre 2022
+ */
 public class Server {
     private LinkedList<Documento> linkedList_documento;
     private ArrayList<Documento> lista_contiene_palabra = new ArrayList<>();
@@ -23,9 +27,20 @@ public class Server {
     private ServerSocket server = null;
     private Socket socket = null;
 
+    /**
+     * Constructor del Server
+     * @param puerto Integer Es el puerto al que se conecta el servidor.
+     */
     public Server(Integer puerto){
         this.puerto = puerto;
     }
+
+    /**
+     * Iniciar el servidor, que espera un Mensaje del cliente y devuele una ArrayList de Documentos dependiendo de lo recibido en el mensaje.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws ClassNotFoundException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws InvalidFormatException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void iniciar() throws IOException, ClassNotFoundException, InvalidFormatException {
         server = new ServerSocket(puerto);
         System.out.println("Servidor iniciado");
@@ -112,6 +127,11 @@ public class Server {
         }
     }
 
+    /**
+     * Indiza los documentos de la carpeta especificada.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws InvalidFormatException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     private void indizar() throws IOException, InvalidFormatException {
         File ruta = new File("Archivos");
 
@@ -129,7 +149,7 @@ public class Server {
             if (file.isDirectory()){
                 String[] archivos_subcarpeta = file.list();
 
-                for (int j=0;j<archivos_subcarpeta.length;j++){
+                for (int j=0;j<archivos_subcarpeta.length;j++){//Para recorrer dentro de las carpetas de la carpeta archivo
                     File sub_file = new File(file.getAbsolutePath(), archivos_subcarpeta[j]);
 
                     Documento documento = new Documento();
@@ -164,11 +184,15 @@ public class Server {
                 lista_temp2.add(documento);
             }
         }
-
+        // Aquí ya los setea como atributos del server
         this.linkedList_documento = lista_temp;
         this.lista_contiene_palabra = lista_temp2;
     }
 
+    /**
+     * Busca en los árboles una palabra en específico.
+     * @param searching_word String Palabra a buscar
+     */
     private void search_word(String searching_word){
         lista_contiene_palabra.clear();
 

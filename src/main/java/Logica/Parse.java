@@ -2,12 +2,8 @@ package Logica;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Scanner;
-
 import ArbolBinario.ArbolBinario;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -15,11 +11,24 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.xml.sax.SAXException;
 
+
+/**
+ *@author Sebastían Hernández Bonilla y Adrián Salas Solís
+ *@version v0.1 octubre 2022
+ */
 public class Parse {
+    /**
+     * Constuctor del obejeto Parse.
+     */
     public Parse (){}
 
+    /**
+     * Recibe un documento y analiza su tipo de archivo, si es docx, pdf o txt llama al parse especifico, sino no realiza nada sobre el documento.
+     * @param documento Documento es el documento que recibe.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws InvalidFormatException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void parseDocument(Documento documento) throws IOException, InvalidFormatException {
         File file = new File(documento.getRuta());
         if (getFileExtension(file).equals(".txt")){
@@ -37,8 +46,13 @@ public class Parse {
         }else {
             System.out.println("Error en parse document de " + documento.getNombre());
         }
-
     }
+
+    /**
+     * Parsea un archivo txt y genera un árbolBinaro y un Avl.
+     * @param documento Documento que recibe.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void parseTxt(Documento documento) throws IOException {
         ArbolBinario arbolBinario = new ArbolBinario();
         File file = new File(documento.getRuta());
@@ -57,6 +71,12 @@ public class Parse {
         documento.setNumero_palabras(numero_palabras);
 
     }
+
+    /**
+     * Parsea un archivo pdf y genera un árbolBinaro y un Avl.
+     * @param documento Documento que recibe
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void parsePdf(Documento documento) throws IOException {
         ArbolBinario arbolBinario = new ArbolBinario();
         int numero_palabras = 0;
@@ -81,6 +101,13 @@ public class Parse {
         documento.setNumero_palabras(numero_palabras);
 
     }
+
+    /**
+     * Parsea un archivo docx y genera un árbolBinaro y un Avl.
+     * @param documento Documento que recibe
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws InvalidFormatException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void parseDocs(Documento documento) throws IOException, InvalidFormatException {
         //ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
         File file = new File(documento.getRuta());
@@ -106,6 +133,11 @@ public class Parse {
         //-------------
     }
 
+    /**
+     * Obtiene la extensión de un archivo.
+     * @param file File es el file que recibe.
+     * @return String es la extension del archivo.
+     */
     private String getFileExtension(File file) {
         String name = file.getName();
         int lastIndexOf = name.lastIndexOf(".");

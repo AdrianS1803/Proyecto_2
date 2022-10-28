@@ -87,7 +87,7 @@ public class WindowMainController implements Initializable {
         Cliente cliente = new Cliente(ip,9000);
         Mensaje mensaje = new Mensaje(null, searching_word);
 
-        lista_contiene_palabra = cliente.sendAlgoritmo(mensaje);
+        lista_contiene_palabra = cliente.sendMensaje(mensaje);
         llenar();
     }
 
@@ -129,6 +129,10 @@ public class WindowMainController implements Initializable {
         //No se elimina en tiempo real
         file.deleteOnExit();
     }
+
+    /**
+     * Manda una busqueda al servidor.
+     */
     @FXML
     private void search_word(){
         //Adrian Ip aparta "192.168.1.184"
@@ -142,12 +146,16 @@ public class WindowMainController implements Initializable {
         this.searching_word = searchWord_textField.getText();
         Mensaje mensaje = new Mensaje(searching_word,null);
 
-        lista_contiene_palabra = cliente.sendSearch(mensaje);
+        lista_contiene_palabra = cliente.sendMensaje(mensaje);
 
 
         llenar();
 
     }
+
+    /**
+     * Llena el apartado de busquedas con los resultados.
+     */
     private void llenar(){
         //----------------
 
@@ -216,13 +224,16 @@ public class WindowMainController implements Initializable {
         searchWord_textField.clear();
     }
 
+    /**
+     * Hace una llamada al servidor donde le suministra todos los archivos de la carpeta designada.
+     */
     @FXML
     private void indizar() {
         Cliente cliente = new Cliente(ip, 9000);
         Mensaje mensaje = new Mensaje(null, "Indizando");
 
         ArrayList<Documento> archivos_hayados = new ArrayList<>();
-        archivos_hayados = cliente.sendIndizacion(mensaje);
+        archivos_hayados = cliente.sendMensaje(mensaje);
 
         pane_archivos.getChildren().clear();
 
@@ -238,6 +249,11 @@ public class WindowMainController implements Initializable {
             pane_archivos.getChildren().add(archivosLabel[i]);
         }
     }
+
+    /**
+     * Abre el archivo en el escritorio del ordenador.
+     * @param ruta_file String es la ruta del archivo a abrir.
+     */
     private void showFile(String ruta_file){
         try
         {
@@ -258,6 +274,10 @@ public class WindowMainController implements Initializable {
         }
     }
 
+    /**
+     * Setea el escenario.
+     * @param stage Stage es el escenario.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }

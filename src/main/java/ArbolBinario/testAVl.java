@@ -18,7 +18,7 @@ public class testAVl {
         arbol.insertar(16);*/
         //arbol.preOrden(arbol.obtenerRaiz());
 
-        arbol.inOrder(arbol.obtenerRaiz());
+        //arbol.inOrder(arbol.obtenerRaiz());
         arbol.buscar("lolo",arbol.obtenerRaiz());
 
 
