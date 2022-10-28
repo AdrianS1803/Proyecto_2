@@ -4,10 +4,22 @@ import Logica.Documento;
 
 import java.util.ArrayList;
 
+/**
+ *@author Sebastían Hernández Bonilla y Adrián Salas Solís
+ *@version v0.1 octubre 2022
+ */
 public class RadixSort {
+
+    /**
+     * Constructor de la clase RadixSort.
+     */
     public RadixSort() {
     }
 
+    /**
+     * Metodo de ordenamiento RadixSort.
+     * @param list ArrayList<Documento> es el arraylist de documentos que recibe para ordenarlos por tamaño de documento.
+     */
     public ArrayList<Documento> sort(ArrayList<Documento> list) {
 
         final int NUM_BASE = 10;
