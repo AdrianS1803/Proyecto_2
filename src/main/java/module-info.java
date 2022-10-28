@@ -7,6 +7,8 @@ module com.example.proyecto_2 {
     requires commons.logging;
 
     requires java.xml;
+    requires java.datatransfer;
+    requires java.desktop;
 
 
     opens GUI to javafx.fxml;

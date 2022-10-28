@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ *@author Sebastían Hernández Bonilla y Adrián Salas Solís
+ *@version v0.1 octubre 2022
+ */
 public class WindowMainController implements Initializable {
     @FXML
     private Label test_label;
@@ -57,6 +62,11 @@ public class WindowMainController implements Initializable {
     ///------------------Cambiar esto siempre
     private String ip = "192.168.1.95";
 
+    /**
+     * Inicializa la datos en la ventana.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox_Algoritmo.getItems().addAll(algoritmos);
@@ -64,8 +74,12 @@ public class WindowMainController implements Initializable {
         indizar();
     }
 
+    /**
+     * Llama a las opciones del choiceBox para elegir como ordenar los resultados.
+     * @param event
+     */
     private void ChoiceBox_Algoritmo_Selection(Event event) {
-//Esto habra que cambiarlo
+
         this.searching_word = choiceBox_Algoritmo.getValue();
         System.out.println(searching_word);
 
@@ -77,10 +91,18 @@ public class WindowMainController implements Initializable {
         llenar();
     }
 
+    /**
+     * Cierra la aplicación.
+     * @param event
+     */
     @FXML
     private void closeApp(ActionEvent event) {
         this.stage.close();
     }
+
+    /**
+     * Mueve un archivo ya existente en el computador a la carpeta que se indiza.
+     */
     @FXML
     private void moveFile(){
         File file = new File(moveFile_textField.getText());
@@ -95,6 +117,10 @@ public class WindowMainController implements Initializable {
             System.out.println(e);
         }
     }
+
+    /**
+     * Borra un archivo de la carpeta que se indiza.
+     */
     @FXML
     private void deleteFile(){
         File carpeta = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos");
@@ -147,6 +173,15 @@ public class WindowMainController implements Initializable {
             Button button_openDocument = new Button();
             button_openDocument.setText("Abrir");
 
+            int finalI = i;
+            button_openDocument.setOnAction(showFile ->{
+                try {
+                    showFile(lista_contiene_palabra.get(finalI).getRuta());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
             hBox_button_searchText.getChildren().add(label_searchText);
             hBox_button_searchText.getChildren().add(button_openDocument);
 
@@ -171,6 +206,7 @@ public class WindowMainController implements Initializable {
 
             vBoxes[i].getChildren().add(hBox_arboles);
 
+
             int color = 230;
             vBoxes[i].setBackground(new Background(new BackgroundFill(Color.rgb(color,color,color),CornerRadii.EMPTY, Insets.EMPTY)));
             //-------------------------------------
@@ -180,12 +216,11 @@ public class WindowMainController implements Initializable {
         searchWord_textField.clear();
     }
 
-
     @FXML
-    private void indizar(){
-        Cliente cliente = new Cliente(ip,9000);
+    private void indizar() {
+        Cliente cliente = new Cliente(ip, 9000);
         Mensaje mensaje = new Mensaje(null, "Indizando");
-//Probando
+
         ArrayList<Documento> archivos_hayados = new ArrayList<>();
         archivos_hayados = cliente.sendIndizacion(mensaje);
 
@@ -197,61 +232,34 @@ public class WindowMainController implements Initializable {
 
         Label[] archivosLabel = new Label[archivos_hayados.size()];
 
-        for (int i = 0; i<=archivos_hayados.size()-1; i++){
+        for (int i = 0; i <= archivos_hayados.size() - 1; i++) {
             archivosLabel[i] = new Label();
             archivosLabel[i].setText(archivos_hayados.get(i).getNombre());
             pane_archivos.getChildren().add(archivosLabel[i]);
         }
-
-
-        /*pane_archivos.getChildren().clear();
-        File ruta = new File("Archivos");
-        archivos.setText(ruta.getName());
-        String[] archives_name = ruta.list();
-        Label[] archivos_labels = new Label[archives_name.length];
-
-        for (int i=0; i<archives_name.length; i++){
-            archivos_labels[i] = new Label();
-            pane_archivos.getChildren().add(archivos_labels[i]);
-            archivos_labels[i].setText(archives_name[i]);
-            File f = new File(ruta.getAbsolutePath(), archives_name[i]);
-
-            if (f.isDirectory()){
-                String[] archivos_subcarpeta = f.list();
-
-                for (int j=0;j<archivos_subcarpeta.length;j++){
-                    archivos_labels[i] = new Label();
-                    pane_archivos.getChildren().add(archivos_labels[j]);
-                    archivos_labels[j].setText("    " + archivos_subcarpeta[j]);
-                }
-            }
-
-        }*/
     }
-    /*private void vBox_search_word_llenar(ArrayList<Documento> lista_contiene_palabra){
-        Label[] labels = new Label[lista_contiene_palabra.size()];
-        for (int i = 0; i<=lista_contiene_palabra.size(); i++){
-            labels[i] = new Label();
-            vBox_search_word.getChildren().add(labels[i]);
-            labels[i].setText(lista_contiene_palabra.get(i).getNombre());
-
+    private void showFile(String ruta_file){
+        try
+        {
+            File file = new File(ruta_file);
+            if(!Desktop.isDesktopSupported())
+            {
+                return;
+            }
+            Desktop desktop = Desktop.getDesktop();
+            if(file.exists())
+                try {
+                    desktop.open(file);
+                }catch (Exception e){
+                    desktop.edit(file);
+                }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-
-    }*/
-
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    public void show(){
-        stage.show();
-    }
-    private String getFileExtension(File file) {
-        String name = file.getName();
-        int lastIndexOf = name.lastIndexOf(".");
-        if (lastIndexOf == -1) {
-            return ""; // empty extension
-        }
-        return name.substring(lastIndexOf);
-    }
+
 }

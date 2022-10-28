@@ -2,18 +2,41 @@ package ArbolBinario;
 
 import java.io.Serializable;
 
+/**
+ *@author Sebastían Hernández Bonilla y Adrián Salas Solís
+ *@version v0.1 octubre 2022
+ */
 public class AVL_new implements Serializable {
     private int comparaciones = 0;
     private AVL_Nodo_new raiz;
 
+    /**
+     * Costructor AVL_new.
+     */
     public AVL_new(){
         raiz = null;
     }
+
+    /**
+     * Recupera la raíz de Avl.
+     * @return AVL_Nodo_new es la raíz del Avl
+     */
     public AVL_Nodo_new obtenerRaiz(){
         return raiz;
     }
+
+    /**
+     * Recupera el número de comparaciones realizadas para hallar un nodo.
+     * @return Integer es el número de comparaciones realizadas por el Avl.
+     */
     public int getComparaciones(){return this.comparaciones;}
 
+    /**
+     * Busca un nodo en el Avl a partir de un dato suministrado.
+     * @param dato String dato que busca.
+     * @param raiz AVL_Nodo_new es la raíz del árbol.
+     * @return AVL_Nodo_new es el nodo que coincide con el dato buscado.
+     */
     public AVL_Nodo_new buscar(String dato, AVL_Nodo_new raiz){
         if (raiz == null){
             return null;
@@ -29,6 +52,11 @@ public class AVL_new implements Serializable {
         }
     }
 
+    /**
+     * Recupera el factor de equilibrio de un nodo.
+     * @param avl_nodo_new avl_nodo_new es el nodo del que se obtiene el factor de equilibrio.
+     * @return Integer es el factor de equilibrio del nodo.
+     */
     public int obtenerFactorEquilibrio(AVL_Nodo_new avl_nodo_new){
         if (avl_nodo_new == null){
             return -1;
@@ -37,6 +65,11 @@ public class AVL_new implements Serializable {
         }
     }
 
+    /**
+     * Aplica una rotación hacia la izquierda para balancear el Avl.
+     * @param avl_nodo_new AVL_Nodo_new Es el nodo del que se basa la rotación.
+     * @return AVL_Nodo_new Es el nodo ya rotado a la izquierda.
+     */
     public AVL_Nodo_new rotacionIzquierda(AVL_Nodo_new avl_nodo_new){
         AVL_Nodo_new auxiliar = avl_nodo_new.hijoIzquierdo;
         avl_nodo_new.hijoIzquierdo = auxiliar.hijoDerecho;
@@ -46,6 +79,11 @@ public class AVL_new implements Serializable {
         return auxiliar;
     }
 
+    /**
+     * Aplica una rotación hacia la derecha para balancear el Avl.
+     * @param avl_nodo_new AVL_Nodo_new Es el nodo del que se basa la rotación.
+     * @return AVL_Nodo_new Es el nodo ya rotado a la derecha.
+     */
     public AVL_Nodo_new rotacionDerecha(AVL_Nodo_new avl_nodo_new){
         AVL_Nodo_new auxiliar = avl_nodo_new.hijoDerecho;
         avl_nodo_new.hijoDerecho = auxiliar.hijoIzquierdo;
@@ -55,6 +93,11 @@ public class AVL_new implements Serializable {
         return auxiliar;
     }
 
+    /**
+     * Aplica una rotación doble hacia la izquierda para balancear el Avl.
+     * @param avl_nodo_new AVL_Nodo_new Es el nodo del que se basa la rotación.
+     * @return AVL_Nodo_new Es el nodo ya doblemente rotado a la izquierda.
+     */
     public AVL_Nodo_new rotacionDobleIzquierda(AVL_Nodo_new avl_nodo_new){
         AVL_Nodo_new temporal;
         avl_nodo_new.hijoIzquierdo = rotacionDerecha(avl_nodo_new.hijoIzquierdo);
@@ -62,6 +105,11 @@ public class AVL_new implements Serializable {
         return temporal;
     }
 
+    /**
+     * Aplica una rotación doble hacia la derecha para balancear el Avl.
+     * @param avl_nodo_new AVL_Nodo_new Es el nodo del que se basa la rotación.
+     * @return AVL_Nodo_new Es el nodo ya doblemente rotado a la derecha.
+     */
     public AVL_Nodo_new rotacionDobleDerecha(AVL_Nodo_new avl_nodo_new){
         AVL_Nodo_new temporal;
         avl_nodo_new.hijoDerecho = rotacionIzquierda(avl_nodo_new.hijoDerecho);
@@ -69,6 +117,12 @@ public class AVL_new implements Serializable {
         return temporal;
     }
 
+    /**
+     * Inserta un nuevo nodo al Avl manteniendo el factor de equilibrio, llamado por insertar.
+     * @param nuevo AVL_Nodo_new Es el nodo a insertar.
+     * @param subArbol AVL_Nodo_new Funciona para la recursividad. Cumple la función del un subárbol.
+     * @return AVL_Nodo_new Retorna el nodo que funciona como sub arbol.
+     */
     public AVL_Nodo_new insertarAVL(AVL_Nodo_new nuevo, AVL_Nodo_new subArbol){
         AVL_Nodo_new nuevoPadre = subArbol;
         //System.out.println(nuevo.dato+" < "+subArbol.dato); //nuevo.dato.compareTo(subArbol.dato)<0
@@ -113,6 +167,10 @@ public class AVL_new implements Serializable {
         return nuevoPadre;
     }
 
+    /**
+     * Inserta un nuevo nodo al arbol por medio de un dato.
+     * @param dato String es el dato del nuevo nodo
+     */
     public void insertar(String dato){
         AVL_Nodo_new nuevo = new AVL_Nodo_new(dato);
         if (raiz == null){
@@ -122,7 +180,7 @@ public class AVL_new implements Serializable {
         }
     }
 
-    public void inOrder (AVL_Nodo_new avl_nodo_new){
+    /*public void inOrder (AVL_Nodo_new avl_nodo_new){
         if (avl_nodo_new != null){
             inOrder(avl_nodo_new.hijoIzquierdo);
             System.out.print(avl_nodo_new.dato + ", ");
@@ -145,6 +203,5 @@ public class AVL_new implements Serializable {
             System.out.print(avl_nodo_new.dato + ", ");
 
         }
-    }
-
+    }*/
 }
