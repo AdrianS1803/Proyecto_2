@@ -1,0 +1,1 @@
+packageSearchIndex = [{"m":"com.example.proyecto_2","l":"Algoritmos"},{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.example.proyecto_2","l":"ArbolBinario"},{"m":"com.example.proyecto_2","l":"GUI"},{"m":"com.example.proyecto_2","l":"Logica"},{"m":"com.example.proyecto_2","l":"Socket"}];updateSearchResults();
