@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
-import ArbolBinario.ArbolBinario;
+import ArbolBinario.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -55,21 +55,28 @@ public class Parse {
      */
     public void parseTxt(Documento documento) throws IOException {
         ArbolBinario arbolBinario = new ArbolBinario();
+        AVL_new avl_new = new AVL_new();
+
         File file = new File(documento.getRuta());
         int numero_palabras = 0;
 
         Scanner scanner = new Scanner(file);
 
         while (scanner.hasNext()){
-            arbolBinario.insertNode(scanner.next());
+            String palabra = scanner.next();
+
+            arbolBinario.insertNode(palabra);
+            avl_new.insertar(palabra);
+            System.out.println(palabra);
 
             numero_palabras++;
         }
         scanner.close();
-
+        //------------------------
         documento.setArbolBinario(arbolBinario);
+        documento.setAvl_new(avl_new);
         documento.setNumero_palabras(numero_palabras);
-
+        //--------------------------------
     }
 
     /**
@@ -80,6 +87,7 @@ public class Parse {
     public void parsePdf(Documento documento) throws IOException {
         ArbolBinario arbolBinario = new ArbolBinario();
         int numero_palabras = 0;
+        AVL_new avl_new = new AVL_new();
 
         File file = new File(documento.getRuta());
         FileInputStream fileInputStream = new FileInputStream(file);
@@ -91,15 +99,20 @@ public class Parse {
         Scanner scanner = new Scanner(alldoc);
 
         while (scanner.hasNext()){
-            arbolBinario.insertNode(scanner.next());
+            String palabra = scanner.next();
+
+            arbolBinario.insertNode(palabra);
+            avl_new.insertar(palabra);
+
 
             numero_palabras++;
         }
         scanner.close();
-
+        //--------------
         documento.setArbolBinario(arbolBinario);
+        documento.setAvl_new(avl_new);
         documento.setNumero_palabras(numero_palabras);
-
+        //--------------------
     }
 
     /**
@@ -111,7 +124,7 @@ public class Parse {
     public void parseDocs(Documento documento) throws IOException, InvalidFormatException {
         //ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
         File file = new File(documento.getRuta());
-
+        AVL_new avl_new = new AVL_new();
         XWPFDocument docx = new XWPFDocument(OPCPackage.open(file));
         XWPFWordExtractor wordExtractor = new XWPFWordExtractor(docx);
 
@@ -122,13 +135,16 @@ public class Parse {
         Scanner scanner = new Scanner(wordExtractor.getText());
 
         while (scanner.hasNext()){
-            arbolBinario.insertNode(scanner.next());
+            String palabra = scanner.next();
 
-            numero_palabras++;
+            arbolBinario.insertNode(palabra);
+            avl_new.insertar(palabra);
+
         }
         scanner.close();
-
+        //-----------------
         documento.setArbolBinario(arbolBinario);
+        documento.setAvl_new(avl_new);
         documento.setNumero_palabras(numero_palabras);
         //-------------
     }

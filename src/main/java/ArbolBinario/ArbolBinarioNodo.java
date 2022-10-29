@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class ArbolBinarioNodo implements Serializable {
    private String dato;
-
+    private int comparaciones = 0;
     private Integer concurrencias;
     private ArbolBinarioNodo leftchild;
     private ArbolBinarioNodo rightchild;
@@ -66,5 +66,13 @@ public class ArbolBinarioNodo implements Serializable {
      */
     public void setRightchild(ArbolBinarioNodo rightchild) {
         this.rightchild = rightchild;
+    }
+
+    public int getComparaciones() {
+        return comparaciones;
+    }
+
+    public void setComparaciones(int comparaciones) {
+        this.comparaciones = comparaciones;
     }
 }

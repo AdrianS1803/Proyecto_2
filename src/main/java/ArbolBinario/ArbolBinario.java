@@ -47,6 +47,7 @@ public class ArbolBinario implements Serializable {
                padre = idetificador;
                if(data.compareTo(idetificador.getData())<0){
                    idetificador = idetificador.getLeftchild();
+
                    if(idetificador == null){
                        padre.setLeftchild(newNode);
                        return;
@@ -70,27 +71,29 @@ public class ArbolBinario implements Serializable {
     public ArbolBinarioNodo search(String data){
         ArbolBinarioNodo identificador = root;
 
+        int compara = 0;
+
         while( identificador.getData() != data ){
             if (data.compareTo(identificador.getData()) == 0){
-                comparaciones++;
+                compara++;
+                identificador.setComparaciones(compara);
                 return identificador;
-                }
-            if (data.compareTo(identificador.getData())<0){ // El caso en que es menor es cuando compareTo da negativo
+            }
+            if (data.compareTo(identificador.getData())<0){ // El caso en que es  menor es cuando compareTo da negativo
                 identificador = identificador.getLeftchild();
-                comparaciones++;
+                compara++;
 
             }else{
                 identificador = identificador.getRightchild();
-                comparaciones++;
+                compara++;
             }
             if(identificador == null){
-                comparaciones++;
                 return null;}
         }
         return identificador;
     }
-
-    /*public void preOrden(ArbolBinarioNodo root){//Arreglar ocurrencias
+//----------------------------------------------------------------------------------------------------Eliminar esto al final
+    public void preOrden(ArbolBinarioNodo root){//Arreglar ocurrencias
         if(root != null){
             System.out.println(root.getData() + root.getConcurrencias() + ", ");
             preOrden(root.getLeftchild());
@@ -112,7 +115,7 @@ public class ArbolBinario implements Serializable {
             postOrden(root.getRightchild());
             System.out.println(root.getData() + root.getConcurrencias() + ", ");
         }
-    }*/
+    }
 
 
 }

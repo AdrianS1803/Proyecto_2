@@ -1,4 +1,7 @@
-package ArbolBinario;
+package Algoritmos;
+
+import ArbolBinario.AVL_Nodo_new;
+import ArbolBinario.AVL_new;
 
 public class testAVl {
     public static void main(String[] args){
@@ -19,12 +22,18 @@ public class testAVl {
         //arbol.preOrden(arbol.obtenerRaiz());
 
         //arbol.inOrder(arbol.obtenerRaiz());
-        arbol.buscar("lolo",arbol.obtenerRaiz());
+        arbol.buscar("juja", arbol.obtenerRaiz());
+        //System.out.println(arbol.buscar("marco",arbol.obtenerRaiz()).getComparaciones());
+
+        AVL_Nodo_new avl_nodo_new = arbol.buscar("babo",arbol.obtenerRaiz());
+        int comparaciones = avl_nodo_new.comparaciones;
+        System.out.println(comparaciones);
 
 
-        System.out.println("\n");
 
-        System.out.println(arbol.getComparaciones());
+        //System.out.println("\n");
+
+
 
 
 

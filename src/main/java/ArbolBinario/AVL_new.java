@@ -24,13 +24,13 @@ public class AVL_new implements Serializable {
     public AVL_Nodo_new obtenerRaiz(){
         return raiz;
     }
-
+//-*---------------------------------------------------------------------------
     /**
      * Recupera el número de comparaciones realizadas para hallar un nodo.
      * @return Integer es el número de comparaciones realizadas por el Avl.
      */
     public int getComparaciones(){return this.comparaciones;}
-
+//--------------------------------------------------------------------------------------
     /**
      * Busca un nodo en el Avl a partir de un dato suministrado.
      * @param dato String dato que busca.
@@ -38,17 +38,22 @@ public class AVL_new implements Serializable {
      * @return AVL_Nodo_new es el nodo que coincide con el dato buscado.
      */
     public AVL_Nodo_new buscar(String dato, AVL_Nodo_new raiz){
-        if (raiz == null){
+        System.out.println("aa");
+        if (raiz == null){///ALgo pasa aqui
+            comparaciones=0;
             return null;
-        } else if (raiz.dato == dato) {
+        } else if (raiz.dato.toLowerCase() == dato.toLowerCase()) {
             comparaciones++;
+            raiz.comparaciones = comparaciones;
+            this.comparaciones = 0;
+            System.out.println(raiz);
             return raiz;
-        } else if (raiz.dato.compareTo(dato)<0) {//raiz.dato < dato
+        } else if (raiz.dato.toLowerCase().compareTo(dato.toLowerCase())<0) {//raiz.dato < dato
             comparaciones++;
-            return buscar(dato, raiz.hijoDerecho);
+            return buscar(dato.toLowerCase(), raiz.hijoDerecho);
         }else {
             comparaciones++;
-            return buscar(dato, raiz.hijoIzquierdo);
+            return buscar(dato.toLowerCase(), raiz.hijoIzquierdo);
         }
     }
 
@@ -179,8 +184,8 @@ public class AVL_new implements Serializable {
             raiz = insertarAVL(nuevo, raiz);
         }
     }
-
-    /*public void inOrder (AVL_Nodo_new avl_nodo_new){
+//--------------------------------------------------------------------Eliminar esto al final
+    public void inOrder (AVL_Nodo_new avl_nodo_new){
         if (avl_nodo_new != null){
             inOrder(avl_nodo_new.hijoIzquierdo);
             System.out.print(avl_nodo_new.dato + ", ");
@@ -203,5 +208,5 @@ public class AVL_new implements Serializable {
             System.out.print(avl_nodo_new.dato + ", ");
 
         }
-    }*/
+    }
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public class AVL_Nodo_new implements Serializable {
     String dato;
+    public int comparaciones;
     int factor_equilibrio;
     AVL_Nodo_new hijoIzquierdo;
     AVL_Nodo_new hijoDerecho;

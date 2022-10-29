@@ -200,10 +200,10 @@ public class WindowMainController implements Initializable {
             HBox hBox_arboles = new HBox();
 
             Label label_arbolBinario = new Label();
-            label_arbolBinario.setText(lista_contiene_palabra.get(i).getArbolBinario().getRoot().getData()); // Hacer el metodo devolver comparaciones
+            label_arbolBinario.setText("Comparaciones A.Binario: "+String.valueOf(lista_contiene_palabra.get(i).getComparaciones_ArbolBinario())); // Hacer el metodo devolver comparaciones lista_contiene_palabra.get(i).getArbolBinario().getRoot().getData()
 
             Label label_AVL = new Label();
-            label_AVL.setText("Futuro resultado AVL");///Poner este resultado
+            label_AVL.setText("Comparaciones AVL: " + String.valueOf(lista_contiene_palabra.get(i).getComparaciones_AVL()));///Poner este resultado
 
             Label label_numPalabras = new Label();
             label_numPalabras.setText(lista_contiene_palabra.get(i).getNumero_palabras().toString());

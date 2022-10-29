@@ -3,6 +3,11 @@ package Socket;
 import Algoritmos.BubbleSort;
 import Algoritmos.QuickSort;
 import Algoritmos.RadixSort;
+import ArbolBinario.AVL_new;
+import ArbolBinario.ArbolBinario;
+import ArbolBinario.ArbolBinarioNodo;
+import ArbolBinario.AVL_new;
+import ArbolBinario.AVL_Nodo_new;
 import Logica.Documento;
 import Logica.Mensaje;
 import Logica.Parse;
@@ -190,7 +195,7 @@ public class Server {
     }
 
     /**
-     * Busca en los árboles una palabra en específico.
+     * Busca en los árboles una palabra en específico si la encuentra añade al la lista contiene palabra el documento.
      * @param searching_word String Palabra a buscar
      */
     private void search_word(String searching_word){
@@ -198,8 +203,27 @@ public class Server {
 
         for (int i = 0; i<=linkedList_documento.size()-1; i++){
             if (linkedList_documento.get(i).getArbolBinario().search(searching_word)!=null){
+                //System.out.println(linkedList_documento.get(i).getArbolBinario().search(searching_word));
+
+                (linkedList_documento.get(i).getArbolBinario().search(searching_word)).getComparaciones();
+
+                linkedList_documento.get(i).setComparaciones_ArbolBinario((linkedList_documento.get(i).getArbolBinario().search(searching_word)).getComparaciones());
 
                 lista_contiene_palabra.add(linkedList_documento.get(i));
+            }
+        }
+        for (int j = 0; j<=linkedList_documento.size()-1;j++){
+            System.out.println(linkedList_documento.get(j).getAvl_new().buscar(searching_word, linkedList_documento.get(j).getAvl_new().obtenerRaiz()));
+            if (linkedList_documento.get(j).getAvl_new().buscar(searching_word,linkedList_documento.get(j).getAvl_new().obtenerRaiz())!=null){
+                AVL_new avl_new = linkedList_documento.get(j).getAvl_new();
+                AVL_Nodo_new avlNodo = avl_new.buscar(searching_word, avl_new.obtenerRaiz());
+
+                System.out.println(avlNodo.comparaciones);
+                linkedList_documento.get(j).setComparaciones_AVL(avlNodo.comparaciones);
+
+                if (!linkedList_documento.contains(linkedList_documento.get(j))){
+                    lista_contiene_palabra.add(linkedList_documento.get(j));
+                }
             }
         }
     }
