@@ -19,6 +19,7 @@ public class RadixSort {
     /**
      * Metodo de ordenamiento RadixSort.
      * @param list ArrayList<Documento> es el arraylist de documentos que recibe para ordenarlos por tamaño de documento.
+     * @return ArrayList returna el arraylist de documentos ordenados por tamaño.
      */
     public ArrayList<Documento> sort(ArrayList<Documento> list) {
 

@@ -22,6 +22,7 @@ public class QuickSort {
     /**
      * Metodo de llamado al QuickSort.
      * @param names ArrayList<Documento> es el arraylist de documentos que recibe para ordenarlos en orden de nombre alfabéticamente.
+     * @return ArrayList returna el arraylist ordenado por nombres.
      */
     public ArrayList<Documento> sort(ArrayList<Documento> names) {
 

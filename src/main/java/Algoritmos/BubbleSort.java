@@ -21,6 +21,7 @@ public class BubbleSort {
     /**
      * Metodo de ordenamiento BubbleSort.
      * @param array ArrayList<Documento> es el arraylist de documentos que recibe para ordenarlos en orden de fecha.
+     * @return ArrayList returna el arraylist de documentos ordenados por fecha.
      */
     public ArrayList<Documento> sort(ArrayList<Documento> array){
 
