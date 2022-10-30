@@ -13,7 +13,7 @@ public class abtest {
 
         //arbol.preOrden(arbol.getRoot());
         //arbol.inOrden(arbol.getRoot());
-        System.out.println(arbol.buscar("pru",  arbol.obtenerRaiz()).comparaciones);
+      //  System.out.println(arbol.buscar("pru",  arbol.obtenerRaiz()).comparaciones);
        //arbol.postOrden(arbol.getRoot());
 
         String a = "prue";
