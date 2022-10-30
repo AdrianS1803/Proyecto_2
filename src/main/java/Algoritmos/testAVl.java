@@ -25,11 +25,16 @@ public class testAVl {
         arbol.buscar("juja", arbol.obtenerRaiz());
         //System.out.println(arbol.buscar("marco",arbol.obtenerRaiz()).getComparaciones());
 
-        AVL_Nodo_new avl_nodo_new = arbol.buscar("babo",arbol.obtenerRaiz());
+        /*AVL_Nodo_new avl_nodo_new = arbol.buscar("babo",arbol.obtenerRaiz());
         int comparaciones = avl_nodo_new.comparaciones;
-        System.out.println(comparaciones);
+        System.out.println(comparaciones);*/
 
-
+        arbol.inOrder(arbol.obtenerRaiz());
+        arbol.setComparacionesArbol(arbol.buscar("lolo", arbol.obtenerRaiz()).getComparaciones());
+        System.out.println(arbol.getComparaciones());
+        arbol.setComparacionesArbol(0);
+        arbol.setComparacionesArbol(arbol.buscar("juan", arbol.obtenerRaiz()).getComparaciones());
+        System.out.println(arbol.getComparaciones());
 
         //System.out.println("\n");
 
