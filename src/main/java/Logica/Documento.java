@@ -19,6 +19,10 @@ public class Documento implements Serializable {
     private int comparaciones_AVL;
     private int comparaciones_ArbolBinario;
 
+
+    private String[] fraseShow = new String[3];
+
+
     /**
      * Constructor de la clase objeto Documento.
      */
@@ -134,4 +138,11 @@ public class Documento implements Serializable {
      */
     public void setComparaciones_ArbolBinario(int comparaciones_ArbolBinario){this.comparaciones_ArbolBinario = comparaciones_ArbolBinario;}
 
+    public String[] getFraseShow() {
+        return fraseShow;
+    }
+
+    public void setFraseShow(String[] fraseShow) {
+        this.fraseShow = fraseShow;
+    }
 }

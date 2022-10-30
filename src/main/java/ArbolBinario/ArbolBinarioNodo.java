@@ -13,6 +13,10 @@ public class ArbolBinarioNodo implements Serializable {
     private ArbolBinarioNodo leftchild;
     private ArbolBinarioNodo rightchild;
 
+
+    private String[] frase = new  String[3];
+
+
     /**
      * Constructor de la clase ArbolBinarioNodo, recibe un string.
      * @param data String dato que guarda el nodo.
@@ -75,4 +79,15 @@ public class ArbolBinarioNodo implements Serializable {
     public void setComparaciones(int comparaciones) {
         this.comparaciones = comparaciones;
     }
+
+
+
+    public String[] getFrase() {
+        return frase;
+    }
+
+    public void setFrase(String[] frase) {
+        this.frase = frase;
+    }
+
 }

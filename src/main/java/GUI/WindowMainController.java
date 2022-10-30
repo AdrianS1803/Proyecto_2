@@ -60,7 +60,7 @@ public class WindowMainController implements Initializable {
     private String searching_word = "";
     private String[] algoritmos = {"Nombre", "Fecha", "Palabras"};
     ///------------------Cambiar esto siempre
-    private String ip = "192.168.1.95";
+    private String ip = "192.168.5.171";
 
     /**
      * Inicializa la datos en la ventana.
@@ -176,7 +176,7 @@ public class WindowMainController implements Initializable {
             HBox hBox_button_searchText = new HBox();
 
             Label label_searchText = new Label();
-            label_searchText.setText("Futura palabra buscada");
+            label_searchText.setText("Frase: " + "Antes: " + lista_contiene_palabra.get(i).getFraseShow()[0]+ "Frase: "+ lista_contiene_palabra.get(i).getFraseShow()[1]+ " Despues: "  + lista_contiene_palabra.get(i).getFraseShow()[2]);
 
             Button button_openDocument = new Button();
             button_openDocument.setText("Abrir");
@@ -206,7 +206,8 @@ public class WindowMainController implements Initializable {
             label_AVL.setText("Comparaciones AVL: " + String.valueOf(lista_contiene_palabra.get(i).getComparaciones_AVL()));///Poner este resultado
 
             Label label_numPalabras = new Label();
-            label_numPalabras.setText(lista_contiene_palabra.get(i).getNumero_palabras().toString());
+            label_numPalabras.setText("Número de palabras: " + lista_contiene_palabra.get(i).getNumero_palabras().toString());
+
 
             hBox_arboles.getChildren().add(label_arbolBinario);
             hBox_arboles.getChildren().add(label_AVL);

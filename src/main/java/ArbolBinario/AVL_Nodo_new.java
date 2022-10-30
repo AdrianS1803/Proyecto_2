@@ -13,6 +13,8 @@ public class AVL_Nodo_new implements Serializable {
     AVL_Nodo_new hijoIzquierdo;
     AVL_Nodo_new hijoDerecho;
 
+    private String[] frase = new  String[2];
+
     /**
      * Constructor de la clase AVL_Nodo_new, recibe un dato que guarda la información.
      * @param dato String es el dato con la información.
@@ -25,4 +27,11 @@ public class AVL_Nodo_new implements Serializable {
 
     }
 
+    public String getFraseIndice(int i) {
+        return frase[i];
+    }
+
+    public void setFrase(String[] frase) {
+        this.frase = frase;
+    }
 }
