@@ -7,7 +7,7 @@ import java.io.Serializable;
  *@version v0.1 octubre 2022
  */
 public class AVL_new implements Serializable {
-    private int comparacionesArbol = 0;
+    private int comparaciones = 0;
     private AVL_Nodo_new raiz;
 
     /**
@@ -25,18 +25,11 @@ public class AVL_new implements Serializable {
         return raiz;
     }
 //-*---------------------------------------------------------------------------
-
-    public void setComparacionesArbol(int comparacionesArbol) {
-        this.comparacionesArbol = comparacionesArbol;
-    }
-
     /**
      * Recupera el número de comparaciones realizadas para hallar un nodo.
      * @return Integer es el número de comparaciones realizadas por el Avl.
      */
-
-
-    public int getComparaciones(){return this.comparacionesArbol;}
+    public int getComparaciones(){return this.comparaciones;}
 //--------------------------------------------------------------------------------------
     /**
      * Busca un nodo en el Avl a partir de un dato suministrado.
@@ -45,19 +38,21 @@ public class AVL_new implements Serializable {
      * @return AVL_Nodo_new es el nodo que coincide con el dato buscado.
      */
     public AVL_Nodo_new buscar(String dato, AVL_Nodo_new raiz){
+        System.out.println("aa");
         if (raiz == null){///ALgo pasa aqui
-            comparacionesArbol = 0;
+            comparaciones=0;
             return null;
         } else if (raiz.dato.toLowerCase() == dato.toLowerCase()) {
-            comparacionesArbol++;
-            raiz.setComparaciones(comparacionesArbol);
-            this.comparacionesArbol = 0;
+            comparaciones++;
+            raiz.comparaciones = comparaciones;
+            this.comparaciones = 0;
+            System.out.println(raiz);
             return raiz;
         } else if (raiz.dato.toLowerCase().compareTo(dato.toLowerCase())<0) {//raiz.dato < dato
-            comparacionesArbol++;
+            comparaciones++;
             return buscar(dato.toLowerCase(), raiz.hijoDerecho);
         }else {
-            comparacionesArbol++;
+            comparaciones++;
             return buscar(dato.toLowerCase(), raiz.hijoIzquierdo);
         }
     }

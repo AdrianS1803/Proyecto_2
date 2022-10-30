@@ -218,8 +218,8 @@ public class Server {
                 AVL_new avl_new = linkedList_documento.get(j).getAvl_new();
                 AVL_Nodo_new avlNodo = avl_new.buscar(searching_word, avl_new.obtenerRaiz());
 
-                //System.out.println(avlNodo.comparaciones);
-                linkedList_documento.get(j).setComparaciones_AVL(avlNodo.getComparaciones());
+                System.out.println(avlNodo.comparaciones);
+                linkedList_documento.get(j).setComparaciones_AVL(avlNodo.comparaciones);
 
                 if (!linkedList_documento.contains(linkedList_documento.get(j))){
                     lista_contiene_palabra.add(linkedList_documento.get(j));
