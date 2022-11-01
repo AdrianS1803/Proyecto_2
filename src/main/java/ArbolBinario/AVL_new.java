@@ -35,7 +35,15 @@ public class AVL_new implements Serializable {
      * Recupera el número de comparaciones realizadas para hallar un nodo.
      * @return Integer es el número de comparaciones realizadas por el Avl.
      */
+<<<<<<< HEAD
     public int getComparaciones(){return this.comparacionesArbol;}
+=======
+    public int getComparacionesArbol(){return this.comparacionesArbol;}
+
+    public void setComparacionesArbol(int comparacionesArbol) {
+        this.comparacionesArbol = comparacionesArbol;
+    }
+>>>>>>> main
 //--------------------------------------------------------------------------------------
     /**
      * Busca un nodo en el Avl a partir de un dato suministrado.
@@ -44,6 +52,7 @@ public class AVL_new implements Serializable {
      * @return AVL_Nodo_new es el nodo que coincide con el dato buscado.
      */
     public AVL_Nodo_new buscar(String dato, AVL_Nodo_new raiz){
+<<<<<<< HEAD
         //System.out.println("aa");
         if (raiz == null){///ALgo pasa aqui
             comparacionesArbol=0;
@@ -53,6 +62,15 @@ public class AVL_new implements Serializable {
             raiz.setComparaciones(comparacionesArbol);
             this.comparacionesArbol = 0;
             //System.out.println(raiz);
+=======
+        if (raiz == null){
+            comparacionesArbol=0;
+            return null;
+        } else if ((raiz.dato.toLowerCase() == dato.toLowerCase())  ||  raiz.dato.toLowerCase().compareTo(dato.toLowerCase())==0) {
+            comparacionesArbol++;
+            raiz.setComparaciones(comparacionesArbol);
+            this.comparacionesArbol = 0;
+>>>>>>> main
             return raiz;
         } else if (raiz.dato.toLowerCase().compareTo(dato.toLowerCase())<0) {//raiz.dato < dato
             comparacionesArbol++;
@@ -163,7 +181,7 @@ public class AVL_new implements Serializable {
                     }
                 }
             }
-            
+
         } else {
             System.out.println("Nodo Duplicado");
         }
@@ -190,6 +208,9 @@ public class AVL_new implements Serializable {
             raiz = insertarAVL(nuevo, raiz);
         }
     }
+
+
+
 //--------------------------------------------------------------------Eliminar esto al final
     public void inOrder (AVL_Nodo_new avl_nodo_new){
         if (avl_nodo_new != null){

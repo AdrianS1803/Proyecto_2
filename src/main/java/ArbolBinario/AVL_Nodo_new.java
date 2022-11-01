@@ -7,11 +7,18 @@ import java.io.Serializable;
  *@version v0.1 octubre 2022
  */
 public class AVL_Nodo_new implements Serializable {
+<<<<<<< HEAD
     String dato;
+=======
+    public String dato;
+>>>>>>> main
     private int comparaciones;
     int factor_equilibrio;
-    AVL_Nodo_new hijoIzquierdo;
-    AVL_Nodo_new hijoDerecho;
+    public AVL_Nodo_new hijoIzquierdo;
+    public AVL_Nodo_new hijoDerecho;
+
+
+    private String[] frase = new  String[2];
 
     /**
      * Constructor de la clase AVL_Nodo_new, recibe un dato que guarda la información.
@@ -25,6 +32,18 @@ public class AVL_Nodo_new implements Serializable {
 
     }
 
+<<<<<<< HEAD
+=======
+    public String getFraseIndice(int i) {
+        return frase[i];
+    }
+
+    public void setFrase(String[] frase) {
+        this.frase = frase;
+    }
+
+
+>>>>>>> main
     public int getComparaciones() {
         return comparaciones;
     }

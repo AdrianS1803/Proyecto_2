@@ -3,6 +3,8 @@ package Logica;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import ArbolBinario.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -57,20 +59,34 @@ public class Parse {
         ArbolBinario arbolBinario = new ArbolBinario();
         AVL_new avl_new = new AVL_new();
 
+        LinkedList<String> listaPalbra = new LinkedList<>();
+
         File file = new File(documento.getRuta());
         int numero_palabras = 0;
 
         Scanner scanner = new Scanner(file);
 
+
+
         while (scanner.hasNext()){
             String palabra = scanner.next();
+            palabra = palabra.toLowerCase();
+
+            listaPalbra.add(palabra);
+
 
             arbolBinario.insertNode(palabra);
+
             avl_new.insertar(palabra);
-            System.out.println(palabra);
+
 
             numero_palabras++;
         }
+
+
+        generaPalabras(listaPalbra, arbolBinario);
+
+
         scanner.close();
         //------------------------
         documento.setArbolBinario(arbolBinario);
@@ -89,6 +105,8 @@ public class Parse {
         int numero_palabras = 0;
         AVL_new avl_new = new AVL_new();
 
+        LinkedList<String> listaPalbra = new LinkedList<>();
+
         File file = new File(documento.getRuta());
         FileInputStream fileInputStream = new FileInputStream(file);
         PDDocument pdDocument = PDDocument.load(fileInputStream);
@@ -100,6 +118,9 @@ public class Parse {
 
         while (scanner.hasNext()){
             String palabra = scanner.next();
+            palabra = palabra.toLowerCase();
+
+            listaPalbra.add(palabra);
 
             arbolBinario.insertNode(palabra);
             avl_new.insertar(palabra);
@@ -107,6 +128,9 @@ public class Parse {
 
             numero_palabras++;
         }
+
+        generaPalabras(listaPalbra, arbolBinario);
+
         scanner.close();
         //--------------
         documento.setArbolBinario(arbolBinario);
@@ -132,15 +156,25 @@ public class Parse {
         ArbolBinario arbolBinario = new ArbolBinario();
         int numero_palabras = 0;
 
+        LinkedList<String> listaPalbra = new LinkedList<>();
+
         Scanner scanner = new Scanner(wordExtractor.getText());
 
         while (scanner.hasNext()){
             String palabra = scanner.next();
+            palabra = palabra.toLowerCase();
+
+            listaPalbra.add(palabra);
 
             arbolBinario.insertNode(palabra);
             avl_new.insertar(palabra);
 
+            numero_palabras++;
+
         }
+
+        generaPalabras(listaPalbra, arbolBinario);
+
         scanner.close();
         //-----------------
         documento.setArbolBinario(arbolBinario);
@@ -161,5 +195,49 @@ public class Parse {
             return ""; // empty extension
         }
         return name.substring(lastIndexOf);
+    }
+    private void generaPalabras(LinkedList<String> listaPalbra, ArbolBinario arbolBinario){
+        for (int i = 0; i<=listaPalbra.size()-1; i++){
+
+
+            if (listaPalbra.size() == 1 ){
+
+                arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""," " + listaPalbra.get(i),""});
+            } else if (listaPalbra.size() == 2){
+
+                if (i == 0)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""," " + listaPalbra.get(i)," " +listaPalbra.get(i+1)});
+                else
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{listaPalbra.get(i-1)," " + listaPalbra.get(i),""});
+            } else if (listaPalbra.size() == 3){
+                if (i == 0)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"", " " + listaPalbra.get(i), " " + listaPalbra.get(i+1) + " "+listaPalbra.get(i+2)});
+                else if (i == 1)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i-1), " " + listaPalbra.get(i), " " + listaPalbra.get(i+1) + " " });
+                else if (i == 2)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i-1) + " "+listaPalbra.get(i-2), " " + listaPalbra.get(i), " " });
+            } else if (listaPalbra.size() == 4) {
+                if (i == 0)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"", " " + listaPalbra.get(i), " " + listaPalbra.get(i+1) + " "+listaPalbra.get(i+2) + listaPalbra.get(i+3)});
+                else if (i == 1)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-1), " "+listaPalbra.get(i)  ," "+listaPalbra.get(i+1)+ " " + listaPalbra.get(i+2)});
+                else if (i == 2)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-1)+" "+listaPalbra.get(i-2), " " + listaPalbra.get(i), " "+listaPalbra.get(i+1) });
+                else if (i == 3)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-1)+" "+listaPalbra.get(i-2) + " "+ listaPalbra.get(i-3), " " + listaPalbra.get(i), ""});
+
+            } else {
+                if (i == 0)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"", " " + listaPalbra.get(i), " " + listaPalbra.get(i + 1) + " " + listaPalbra.get(i + 2) + " " +listaPalbra.get(i + 3)});
+                else if (i == 1)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " " + listaPalbra.get(i + 1) + " " + listaPalbra.get(i + 2)});
+                else if (i == 2)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 2) + " " + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " " + listaPalbra.get(i + 1) + " " + listaPalbra.get(i + 2)});
+                else if (i == listaPalbra.size() - 1)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 2) + " " + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " "});
+                else
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " " + listaPalbra.get(i+1) + " "});
+            }
+        }
     }
 }
