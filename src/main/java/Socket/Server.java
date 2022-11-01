@@ -203,12 +203,11 @@ public class Server {
 
         for (int i = 0; i<=linkedList_documento.size()-1; i++){
             if (linkedList_documento.get(i).getArbolBinario().search(searching_word)!=null){
-                //System.out.println(linkedList_documento.get(i).getArbolBinario().search(searching_word));
 
                 (linkedList_documento.get(i).getArbolBinario().search(searching_word)).getComparaciones();
 
                 linkedList_documento.get(i).setComparaciones_ArbolBinario((linkedList_documento.get(i).getArbolBinario().search(searching_word)).getComparaciones());
-                //System.out.println(linkedList_documento.get(1).getFraseShow());
+
 
                 linkedList_documento.get(i).setFraseShow(linkedList_documento.get(i).getArbolBinario().search(searching_word).getFrase());
 
@@ -218,25 +217,13 @@ public class Server {
         for (int j = 0; j<=linkedList_documento.size()-1;j++){
             AVL_new avl_new = linkedList_documento.get(j).getAvl_new();
 
-            //System.out.println(avl_new.buscar(searching_word.toLowerCase(), avl_new.obtenerRaiz()));
 
             if (linkedList_documento.get(j).getAvl_new().buscar(searching_word,linkedList_documento.get(j).getAvl_new().obtenerRaiz())!=null){
-
-                //System.out.println((linkedList_documento.get(j).getAvl_new().buscar(searching_word,avl_new.obtenerRaiz())).getComparaciones());
-
-                //System.out.println(linkedList_documento.get(j).getAvl_new().getComparacionesArbol());
 
                 linkedList_documento.get(j).getAvl_new().setComparacionesArbol((linkedList_documento.get(j).getAvl_new().buscar(searching_word,avl_new.obtenerRaiz())).getComparaciones());
 
                 System.out.println(linkedList_documento.get(j).getAvl_new().getComparacionesArbol());
 
-                //linkedList_documento.get(j).getAvl_new().setComparacionesArbol(avl_new.buscar(searching_word, avl_new.obtenerRaiz()).getComparaciones());
-                //System.out.println(linkedList_documento.get(j).getComparaciones_AVL());
-
-
-                /*if (!linkedList_documento.contains(linkedList_documento.get(j))){
-                    lista_contiene_palabra.add(linkedList_documento.get(j));
-                }*/
             }
         }
     }
