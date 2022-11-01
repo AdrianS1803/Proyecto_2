@@ -222,16 +222,11 @@ public class Server {
 
             if (linkedList_documento.get(j).getAvl_new().buscar(searching_word,linkedList_documento.get(j).getAvl_new().obtenerRaiz())!=null){
 
-<<<<<<< HEAD
-                System.out.println(avlNodo.getComparaciones());
-                linkedList_documento.get(j).setComparaciones_AVL(avlNodo.getComparaciones());
-=======
                 //System.out.println((linkedList_documento.get(j).getAvl_new().buscar(searching_word,avl_new.obtenerRaiz())).getComparaciones());
 
                 //System.out.println(linkedList_documento.get(j).getAvl_new().getComparacionesArbol());
 
                 linkedList_documento.get(j).getAvl_new().setComparacionesArbol((linkedList_documento.get(j).getAvl_new().buscar(searching_word,avl_new.obtenerRaiz())).getComparaciones());
->>>>>>> main
 
                 System.out.println(linkedList_documento.get(j).getAvl_new().getComparacionesArbol());
 

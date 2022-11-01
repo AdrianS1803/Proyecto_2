@@ -60,7 +60,7 @@ public class WindowMainController implements Initializable {
     private String searching_word = "";
     private String[] algoritmos = {"Nombre", "Fecha", "Palabras"};
     ///------------------Cambiar esto siempre
-    private String ip = "192.168.1.42";
+    private String ip = "192.168.100.3";
 
     /**
      * Inicializa la datos en la ventana.
@@ -104,7 +104,7 @@ public class WindowMainController implements Initializable {
     @FXML
     private void moveFile(){
         File file = new File(moveFile_textField.getText());
-        File carpeta = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos");
+        File carpeta = new File("Archivos");
 
         String carpeta_ruta = carpeta.getAbsolutePath() + "\\" + file.getName();
         System.out.println(carpeta_ruta);
@@ -121,7 +121,7 @@ public class WindowMainController implements Initializable {
      */
     @FXML
     private void deleteFile(){
-        File carpeta = new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto2\\Proyecto_2\\Archivos");
+        File carpeta = new File("Archivos");
         File file = new File(carpeta.getAbsolutePath()+"\\"+moveFile_textField.getText());
 
         //No se elimina en tiempo real
@@ -136,7 +136,7 @@ public class WindowMainController implements Initializable {
         //Adrian Ip aparta "192.168.1.184"
         //Adrian Ip casa "192.168.5.171"
         // TEC Ip "172.18.177.16"
-        //Sebas Ip
+        //Sebas Ip 192.168.100.3
         //Sebas Ip
 
 

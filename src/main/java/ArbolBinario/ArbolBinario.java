@@ -92,30 +92,4 @@ public class ArbolBinario implements Serializable {
         }
         return identificador;
     }
-//----------------------------------------------------------------------------------------------------Eliminar esto al final
-    public void preOrden(ArbolBinarioNodo root){//Arreglar ocurrencias
-        if(root != null){
-            System.out.println(root.getData() + root.getConcurrencias() + ", ");
-            preOrden(root.getLeftchild());
-            preOrden(root.getRightchild());
-        }
-    }
-
-    public void inOrden(ArbolBinarioNodo root){
-        if(root != null){
-            inOrden(root.getLeftchild());
-            System.out.println(root.getData() + ", ");
-            inOrden(root.getRightchild());
-        }
-    }
-
-    public void postOrden(ArbolBinarioNodo root){
-        if(root != null){
-            postOrden(root.getLeftchild());
-            postOrden(root.getRightchild());
-            System.out.println(root.getData() + root.getConcurrencias() + ", ");
-        }
-    }
-
-
 }

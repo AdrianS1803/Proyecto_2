@@ -7,11 +7,7 @@ import java.io.Serializable;
  *@version v0.1 octubre 2022
  */
 public class AVL_Nodo_new implements Serializable {
-<<<<<<< HEAD
-    String dato;
-=======
     public String dato;
->>>>>>> main
     private int comparaciones;
     int factor_equilibrio;
     public AVL_Nodo_new hijoIzquierdo;
@@ -32,8 +28,6 @@ public class AVL_Nodo_new implements Serializable {
 
     }
 
-<<<<<<< HEAD
-=======
     public String getFraseIndice(int i) {
         return frase[i];
     }
@@ -43,7 +37,6 @@ public class AVL_Nodo_new implements Serializable {
     }
 
 
->>>>>>> main
     public int getComparaciones() {
         return comparaciones;
     }
