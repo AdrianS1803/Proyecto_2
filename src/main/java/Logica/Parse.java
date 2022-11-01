@@ -70,16 +70,15 @@ public class Parse {
 
         while (scanner.hasNext()){
             String palabra = scanner.next();
+            palabra = palabra.toLowerCase();
+
             listaPalbra.add(palabra);
 
 
             arbolBinario.insertNode(palabra);
 
-
-
-
             avl_new.insertar(palabra);
-            //System.out.println(palabra);
+
 
             numero_palabras++;
         }
@@ -119,6 +118,7 @@ public class Parse {
 
         while (scanner.hasNext()){
             String palabra = scanner.next();
+            palabra = palabra.toLowerCase();
 
             listaPalbra.add(palabra);
 
@@ -162,11 +162,14 @@ public class Parse {
 
         while (scanner.hasNext()){
             String palabra = scanner.next();
+            palabra = palabra.toLowerCase();
 
             listaPalbra.add(palabra);
 
             arbolBinario.insertNode(palabra);
             avl_new.insertar(palabra);
+
+            numero_palabras++;
 
         }
 
@@ -223,22 +226,18 @@ public class Parse {
                 else if (i == 3)
                     arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-1)+" "+listaPalbra.get(i-2) + " "+ listaPalbra.get(i-3), " " + listaPalbra.get(i), ""});
 
-            } else
-            if (i == 0)
-                arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"", " " + listaPalbra.get(i), " " + listaPalbra.get(i+1) + " "+listaPalbra.get(i+2) + listaPalbra.get(i+3)});
-            else if (i == 1)
-                arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-1), " "+listaPalbra.get(i)  ," "+listaPalbra.get(i+1)+ " " + listaPalbra.get(i+2)});
-            else if (i == 2)
-                arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-2)+" "+listaPalbra.get(i-1), " "+listaPalbra.get(i)  ," "+listaPalbra.get(i+1)+ " " + listaPalbra.get(i+2)});
-
-            else if (i == listaPalbra.size()-1)
-                arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-3)+" "+listaPalbra.get(i-2)+" "+listaPalbra.get(i-1)," "+listaPalbra.get(i)," "+listaPalbra.get(i+1)});
-            else if(i == listaPalbra.size())
-                arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-4)+" "+listaPalbra.get(i-3)+ " "+listaPalbra.get(i-2)+" "+listaPalbra.get(i-1)," "+listaPalbra.get(i),""});
-            else
-                arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{""+listaPalbra.get(i-2) +" "+listaPalbra.get(i-1)," "+listaPalbra.get(i)," "+listaPalbra.get(i+1)+" "+listaPalbra.get(i+2)});
-
-
+            } else {
+                if (i == 0)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"", " " + listaPalbra.get(i), " " + listaPalbra.get(i + 1) + " " + listaPalbra.get(i + 2) + " " +listaPalbra.get(i + 3)});
+                else if (i == 1)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " " + listaPalbra.get(i + 1) + " " + listaPalbra.get(i + 2)});
+                else if (i == 2)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 2) + " " + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " " + listaPalbra.get(i + 1) + " " + listaPalbra.get(i + 2)});
+                else if (i == listaPalbra.size() - 1)
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 2) + " " + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " "});
+                else
+                    arbolBinario.search(listaPalbra.get(i)).setFrase(new String[]{"" + listaPalbra.get(i - 1), " " + listaPalbra.get(i), " " + listaPalbra.get(i+1) + " "});
+            }
         }
     }
 }

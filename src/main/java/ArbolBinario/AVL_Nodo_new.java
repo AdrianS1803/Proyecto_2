@@ -7,11 +7,12 @@ import java.io.Serializable;
  *@version v0.1 octubre 2022
  */
 public class AVL_Nodo_new implements Serializable {
-    String dato;
-    public int comparaciones;
+    public String dato;
+    private int comparaciones;
     int factor_equilibrio;
-    AVL_Nodo_new hijoIzquierdo;
-    AVL_Nodo_new hijoDerecho;
+    public AVL_Nodo_new hijoIzquierdo;
+    public AVL_Nodo_new hijoDerecho;
+
 
     private String[] frase = new  String[2];
 
@@ -33,5 +34,14 @@ public class AVL_Nodo_new implements Serializable {
 
     public void setFrase(String[] frase) {
         this.frase = frase;
+    }
+
+
+    public int getComparaciones() {
+        return comparaciones;
+    }
+
+    public void setComparaciones(int comparaciones) {
+        this.comparaciones = comparaciones;
     }
 }
