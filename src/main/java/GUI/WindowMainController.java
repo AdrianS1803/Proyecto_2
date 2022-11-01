@@ -107,7 +107,6 @@ public class WindowMainController implements Initializable {
         File carpeta = new File("Archivos");
 
         String carpeta_ruta = carpeta.getAbsolutePath() + "\\" + file.getName();
-        System.out.println(carpeta_ruta);
 
         try {
             Files.move(file.toPath(), Path.of(carpeta_ruta), StandardCopyOption.REPLACE_EXISTING);
@@ -133,6 +132,7 @@ public class WindowMainController implements Initializable {
      */
     @FXML
     private void search_word(){
+<<<<<<< HEAD
         //Adrian Ip aparta "192.168.1.184"
         //Adrian Ip casa "192.168.5.171"
         // TEC Ip "172.18.177.16"
@@ -140,15 +140,15 @@ public class WindowMainController implements Initializable {
         //Sebas Ip
 
 
+=======
+>>>>>>> main
         Cliente cliente = new Cliente(ip,9000);
         this.searching_word = searchWord_textField.getText();
         Mensaje mensaje = new Mensaje(searching_word,null);
 
         lista_contiene_palabra = cliente.sendMensaje(mensaje);
 
-
         llenar();
-
     }
 
     /**
